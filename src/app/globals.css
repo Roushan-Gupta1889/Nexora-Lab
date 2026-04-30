@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ========================================
+   NEXORA LABS — DESIGN TOKENS
+   ======================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-primary-gold: #E6A520;
+  --color-secondary-gold: #FFD77A;
+  --color-dark-gold: #7A4A00;
+  --color-bg-cream: #FFFBF7;
+  --color-bg-warm: #F8F6F2;
+  --color-text-dark: #1A1A1A;
+  --color-text-light: #6B6B6B;
+  --color-card-bg: #FFFFFF;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-card-border: rgba(0, 0, 0, 0.06);
+  --color-gold-glow: rgba(230, 165, 32, 0.15);
+  --color-icon-bg: #FFF8E7;
+
+  /* Fonts */
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+
+  /* Spacing */
+  --section-padding-y: 100px;
+  --section-padding-y-mobile: 60px;
+  --container-max-width: 1200px;
+
+  /* Border Radius */
+  --radius-card: 16px;
+  --radius-container: 20px;
+  --radius-pill: 999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-cream);
+  color: var(--color-text-dark);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), Georgia, serif;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 700; }
+h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; }
+h4 { font-size: clamp(18px, 2vw, 22px); font-weight: 500; }
+
+p {
+  color: var(--color-text-light);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.7;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.gold-text {
+  color: var(--color-dark-gold);
+  font-family: var(--font-heading), Georgia, serif;
+  font-style: italic;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--color-icon-bg);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-dark-gold);
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-warm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-gold);
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  background: var(--color-secondary-gold);
+  color: var(--color-text-dark);
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
