@@ -44,7 +44,7 @@ export function FooterSection() {
   return (
     <footer className="bg-[#FCF9F2] pt-24 pb-8 text-text-dark overflow-hidden relative border-t border-black/[0.04]">
       
-      {/* Decorative subtle gradient background */}
+      {/* Decorative subtle gradient background */} 
       <div className="absolute bottom-0 right-0 w-full h-[500px] bg-gradient-to-tl from-[#FDEFD8]/60 to-transparent pointer-events-none" />
 
       <div className="max-w-[1300px] mx-auto px-6 relative z-10">
@@ -54,12 +54,12 @@ export function FooterSection() {
           
           {/* Brand Column */}
           <div className="lg:col-span-3 flex flex-col">
-            <Link href="/" className="relative w-[200px] h-12 mb-6 block">
+            <Link href="/" className="relative w-[280px] h-20 mb-6 block">
               <Image
-                src="/images/logo.png"
-                alt="Nexora Labs"
-                fill
-                className="object-contain object-left scale-110 origin-left"
+              src="/images/logo.png"
+              alt="Nexora Labs"
+              fill
+              className="object-contain object-left scale-150 origin-left"
               />
             </Link>
             <p className="text-text-light text-[15px] leading-relaxed mb-8 max-w-[260px]">
@@ -146,19 +146,19 @@ export function FooterSection() {
                 <span className="text-[15px] leading-relaxed whitespace-pre-line">{footerData.contact.address}</span>
               </li>
               <li>
-                <a href={`mailto:${footerData.contact.email}`} className="flex items-center gap-3 text-text-light hover:text-[#7A4A00] transition-colors">
-                  <Mail size={18} className="shrink-0 text-[#B08D46]" />
-                  <span className="text-[15px]">{footerData.contact.email}</span>
+                <a href={`mailto:${footerData.contact.email}`} className="flex items-start gap-3 text-text-light hover:text-[#7A4A00] transition-colors break-words">
+                  <Mail size={18} className="mt-0.5 shrink-0 text-[#B08D46]" />
+                  <span className="text-[15px] break-all">{footerData.contact.email}</span>
                 </a>
               </li>
               <li>
-                <a href={`tel:${footerData.contact.phone.replace(/[^0-9+]/g, '')}`} className="flex items-center gap-3 text-text-light hover:text-[#7A4A00] transition-colors">
-                  <Phone size={18} className="shrink-0 text-[#B08D46]" />
+                <a href={`tel:${footerData.contact.phone.replace(/[^0-9+]/g, '')}`} className="flex items-start gap-3 text-text-light hover:text-[#7A4A00] transition-colors">
+                  <Phone size={18} className="mt-0.5 shrink-0 text-[#B08D46]" />
                   <span className="text-[15px]">{footerData.contact.phone}</span>
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-text-light group">
-                <Clock size={18} className="shrink-0 text-[#B08D46]" />
+              <li className="flex items-start gap-3 text-text-light group">
+                <Clock size={18} className="mt-0.5 shrink-0 text-[#B08D46]" />
                 <span className="text-[15px]">{footerData.contact.hours}</span>
               </li>
             </ul>
