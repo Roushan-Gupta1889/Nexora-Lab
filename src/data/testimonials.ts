@@ -11,7 +11,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "rohit",
-    avatar: "/images/testimonials/rohit-mehta.png",
+    avatar: "/images/testimonials/testimonial-rohit.png",
     name: "Rohit Mehta",
     role: "Founder",
     company: "Brewora Coffee Co.",
@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "neha",
-    avatar: "/images/testimonials/neha-kapoor.png",
+    avatar: "/images/testimonials/testimonial-neha.png",
     name: "Neha Kapoor",
     role: "CEO",
     company: "FitFuel Nutrition",
@@ -31,7 +31,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "aman",
-    avatar: "/images/testimonials/aman-verma.png",
+    avatar: "/images/testimonials/testimonial-aman.png",
     name: "Aman Verma",
     role: "Marketing Head",
     company: "Apexivo Architects",

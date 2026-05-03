@@ -22,7 +22,7 @@ export type PortfolioCategory = (typeof portfolioCategories)[number];
 export const projects: PortfolioProject[] = [
   {
     id: "brewora",
-    image: "/images/portfolio/brewora.png",
+    image: "/images/portfolio/portfolio-brewora.png",
     category: "E-Commerce",
     categoryLabel: "E-COMMERCE",
     title: "Brewora Coffee Co.",
@@ -32,7 +32,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "fitfuel",
-    image: "/images/portfolio/fitfuel.png",
+    image: "/images/portfolio/portfolio-fitfuel.png",
     category: "Healthcare",
     categoryLabel: "HEALTHCARE",
     title: "FitFuel Nutrition",
@@ -42,7 +42,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "saasly",
-    image: "/images/portfolio/saasly.png",
+    image: "/images/portfolio/portfolio-saasly.png",
     category: "SaaS",
     categoryLabel: "SAAS",
     title: "SaaSly Dashboard",
@@ -52,7 +52,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "apexivo",
-    image: "/images/portfolio/apexivo.png",
+    image: "/images/portfolio/portfolio-apexivo.png",
     category: "Business",
     categoryLabel: "BUSINESS",
     title: "Apexivo Architects",

@@ -8,7 +8,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
  * Used by StatsStrip component.
  */
 export function useCountUp<T extends HTMLElement>(
-  target: number,
+  targetText: string,
   duration: number = 2
 ) {
   const ref = useRef<T>(null);
@@ -18,9 +18,15 @@ export function useCountUp<T extends HTMLElement>(
     if (!el) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.textContent = String(target);
+      el.textContent = targetText;
       return;
     }
+
+    // Extract numbers and non-numbers
+    const numericPart = targetText.match(/[\d.]+/)?.[0] || "0";
+    const targetNumber = parseFloat(numericPart);
+    const prefix = targetText.split(numericPart)[0] || "";
+    const suffix = targetText.split(numericPart)[1] || "";
 
     const obj = { value: 0 };
 
@@ -29,11 +35,11 @@ export function useCountUp<T extends HTMLElement>(
       start: "top 90%",
       onEnter: () => {
         gsap.to(obj, {
-          value: target,
+          value: targetNumber,
           duration,
           ease: "power2.out",
           onUpdate: () => {
-            el.textContent = Math.round(obj.value).toString();
+            el.textContent = `${prefix}${Math.round(obj.value)}${suffix}`;
           },
         });
       },
@@ -43,7 +49,7 @@ export function useCountUp<T extends HTMLElement>(
     return () => {
       trigger.kill();
     };
-  }, [target, duration]);
+  }, [targetText, duration]);
 
   return ref;
 }

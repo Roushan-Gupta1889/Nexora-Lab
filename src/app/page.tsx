@@ -1,17 +1,29 @@
+import { HeroSection } from "@/components/sections/HeroSection";
+import { TrustSection } from "@/components/sections/TrustSection";
+import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { PortfolioSection } from "@/components/sections/PortfolioSection";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { TestimonialSection } from "@/components/sections/TestimonialSection";
+import { TeamSection } from "@/components/sections/TeamSection";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { CTASection } from "@/components/sections/CTASection";
+import { FooterSection } from "@/components/sections/FooterSection";
+
 export default function Home() {
   return (
-    <main className="flex-1">
-      {/* Sections will be added one at a time in Phase 5 */}
-      <section className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h1 className="font-heading text-5xl font-bold mb-4">
-            Nexora <span className="gold-text">Labs</span>
-          </h1>
-          <p className="text-text-light text-lg max-w-md mx-auto">
-            Foundation setup complete. Ready for section builds.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen">
+      <HeroSection />
+      <TrustSection />
+      <WhyChooseUsSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <ProcessSection />
+      <TestimonialSection />
+      <TeamSection />
+      <FAQSection />
+      <CTASection />
+      <FooterSection />
     </main>
   );
 }
