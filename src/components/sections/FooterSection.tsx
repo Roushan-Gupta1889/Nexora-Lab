@@ -60,6 +60,7 @@ export function FooterSection() {
               alt="Nexora Labs"
               fill
               className="object-contain object-left scale-150 origin-left"
+              sizes="280px"
               />
             </Link>
             <p className="text-text-light text-[15px] leading-relaxed mb-8 max-w-[260px]">

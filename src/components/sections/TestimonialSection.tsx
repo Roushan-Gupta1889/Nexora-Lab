@@ -160,6 +160,7 @@ export function TestimonialSection() {
                           alt={card.name}
                           fill
                           className="object-cover"
+                          sizes="56px"
                         />
                       </div>
                       <div>
@@ -219,7 +220,7 @@ export function TestimonialSection() {
             <div className="flex -space-x-2">
               {testimonials.map((t, i) => (
                 <div key={i} className="w-8 h-8 rounded-full border-2 border-bg-warm relative overflow-hidden">
-                  <Image src={t.avatar} alt="Avatar" fill className="object-cover" />
+                  <Image src={t.avatar} alt="Avatar" fill className="object-cover" sizes="32px" />
                 </div>
               ))}
             </div>

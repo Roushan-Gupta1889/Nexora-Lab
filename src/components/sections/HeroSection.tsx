@@ -52,6 +52,12 @@ export function HeroSection() {
           { opacity: 0 },
           { opacity: 1, duration: 0.8 },
           "-=0.4"
+        )
+        .fromTo(
+          tiltRef.current,
+          { opacity: 0, x: 40, scale: 0.95 },
+          { opacity: 1, x: 0, scale: 1, duration: 1.2 },
+          "-=1.5"
         );
 
       // Floating animation for image
@@ -166,6 +172,7 @@ export function HeroSection() {
             <div
               ref={tiltRef}
               className="relative z-10 w-full h-full flex items-center justify-center cursor-default"
+              style={{ opacity: 0 }}
             >
               <div
                 ref={floatRef}

@@ -65,6 +65,7 @@ export function TrustSection() {
                       alt={logo.name}
                       fill
                       className="object-contain"
+                      sizes="140px"
                     />
                   </div>
                 </div>

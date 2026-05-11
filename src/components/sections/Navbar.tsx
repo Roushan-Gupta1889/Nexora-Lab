@@ -46,6 +46,7 @@ export function Navbar() {
                 fill
                 className="object-contain object-left scale-[1.15] md:scale-[1.25] origin-left"
                 priority
+                sizes="(max-width: 768px) 256px, 320px"
               />
             </div>
           </Link>

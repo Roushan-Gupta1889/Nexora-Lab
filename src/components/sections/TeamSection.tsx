@@ -89,6 +89,7 @@ export function TeamSection() {
                     alt={member.name}
                     fill
                     className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   />
 
                   {/* LinkedIn Button floats up on hover */}
