@@ -121,21 +121,12 @@ export function PortfolioSection() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Bottom CTA & Stats */}
-        <div className="flex flex-col items-center gap-16">
+        {/* Bottom CTA */}
+        <div className="flex justify-center mt-12 md:mt-16">
           <Button variant="outline" size="lg" className="group">
             View All Projects
             <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="w-full"
-          >
-            <StatsStrip data={stats} />
-          </motion.div>
         </div>
       </div>
     </section>

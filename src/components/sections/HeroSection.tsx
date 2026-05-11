@@ -16,8 +16,7 @@ export function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const trustRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
+
 
   useGSAP(
     () => {
@@ -46,12 +45,6 @@ export function HeroSection() {
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 },
           "-=0.6"
-        )
-        .fromTo(
-          [trustRef.current, featuresRef.current],
-          { opacity: 0 },
-          { opacity: 1, duration: 0.8 },
-          "-=0.4"
         )
         .fromTo(
           tiltRef.current,
@@ -132,36 +125,6 @@ export function HeroSection() {
               </Button>
             </div>
 
-            <div
-              ref={trustRef}
-              className="flex items-center gap-2 text-sm text-text-light font-medium mb-10"
-              style={{ opacity: 0 }}
-            >
-              <CheckCircle2 size={16} className="text-primary-gold" />
-              <span>No commitment. Free 30-minute consultation.</span>
-            </div>
-
-            {/* Feature Icons Row */}
-            <div
-              ref={featuresRef}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full"
-              style={{ opacity: 0 }}
-            >
-              {[
-                { label: "Fast Delivery" },
-                { label: "SEO Optimized" },
-                { label: "Responsive" },
-                { label: "Secure" },
-              ].map((feature, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 text-sm text-text-dark font-medium"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary-gold shrink-0" />
-                  {feature.label}
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right Column: Image */}

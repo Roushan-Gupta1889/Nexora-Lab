@@ -214,31 +214,6 @@ export function TestimonialSection() {
           ))}
         </div>
 
-        {/* Bottom Social Proof Bar */}
-        <div className="max-w-[800px] mx-auto px-6 py-6 md:py-8 bg-bg-warm rounded-2xl border border-black/[0.04] flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-          <div className="flex items-center gap-3 text-text-dark font-medium">
-            <div className="flex -space-x-2">
-              {testimonials.map((t, i) => (
-                <div key={i} className="w-8 h-8 rounded-full border-2 border-bg-warm relative overflow-hidden">
-                  <Image src={t.avatar} alt="Avatar" fill className="object-cover" sizes="32px" />
-                </div>
-              ))}
-            </div>
-            <span><strong className="text-primary-gold">4.9/5</strong> Rating</span>
-          </div>
-
-          <div className="hidden md:block w-px h-8 bg-black/[0.06]" />
-          
-          <div className="flex items-center gap-2 text-text-dark font-medium">
-            <strong className="text-primary-gold">50+</strong> Happy Clients
-          </div>
-
-          <div className="hidden md:block w-px h-8 bg-black/[0.06]" />
-
-          <div className="flex items-center gap-2 text-text-dark font-medium">
-            <strong className="text-primary-gold">100+</strong> Projects
-          </div>
-        </div>
       </div>
     </section>
   );

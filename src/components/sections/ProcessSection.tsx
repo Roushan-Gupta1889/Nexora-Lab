@@ -31,12 +31,7 @@ const iconMap: Record<string, React.ReactNode> = {
   headphones: <Headphones size={20} />,
 };
 
-const bottomFeatures = [
-  { icon: <Target size={24} />, title: "Strategic Approach" },
-  { icon: <MessageSquare size={24} />, title: "Transparent Communication" },
-  { icon: <Award size={24} />, title: "Quality & Reliability" },
-  { icon: <TrendingUp size={24} />, title: "Results That Grow" },
-];
+
 
 export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,9 +39,7 @@ export function ProcessSection() {
   const lineRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Use Framer Motion for the bottom feature cards
-  const featuresRef = useRef<HTMLDivElement>(null);
-  const isFeaturesInView = useInView(featuresRef, { once: true, margin: "-50px" });
+
 
   useGSAP(
     () => {
@@ -178,40 +171,7 @@ export function ProcessSection() {
           </div>
         </div>
 
-        {/* Bottom Feature Cards */}
-        <div ref={featuresRef}>
-          <motion.div
-            initial="hidden"
-            animate={isFeaturesInView ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {bottomFeatures.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-                }}
-              >
-                <Card className="h-full flex items-center gap-4 p-6 group hover:-translate-y-1 hover:border-primary-gold/20 transition-all duration-300">
-                  <div className="shrink-0 w-12 h-12 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold group-hover:bg-primary-gold group-hover:text-white transition-colors duration-300">
-                    {feature.icon}
-                  </div>
-                  <h5 className="font-semibold text-text-dark text-[15px] leading-tight">
-                    {feature.title}
-                  </h5>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+
       </div>
     </section>
   );

@@ -74,18 +74,8 @@ export function TrustSection() {
           </div>
         </div>
 
-        {/* Divider with Star */}
-        <div className="relative flex items-center justify-center mb-16 md:mb-20">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-black/[0.06]" />
-          </div>
-          <div className="relative bg-bg-warm px-4 flex items-center justify-center text-primary-gold">
-            <Star size={20} className="fill-primary-gold/20" />
-          </div>
-        </div>
-
         {/* Stats Strip */}
-        <div className="w-full">
+        <div className="w-full mt-4">
           <StatsStrip data={stats} />
         </div>
       </div>
