@@ -22,6 +22,7 @@
   /* Fonts */
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
+  --font-cormorant: var(--font-cormorant);
 
   /* Spacing */
   --section-padding-y: 100px;

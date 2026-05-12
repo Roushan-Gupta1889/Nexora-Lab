@@ -71,59 +71,99 @@ export function TeamSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
         >
-          {team.map((member) => (
-            <motion.div key={member.id} variants={cardVariants} className="h-full">
-              <Card
-                variant="bordered"
-                className="h-full p-6 flex flex-col group overflow-hidden"
-              >
-                {/* Image Container */}
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-bg-warm mb-6">
-                  {/* Subtle hover overlay */}
-                  <div className="absolute inset-0 bg-primary-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
-                  
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
+          {team.map((member, index) => (
+            <motion.div 
+              key={member.id} 
+              variants={cardVariants} 
+              className={cn(
+                "relative w-full h-[350px] sm:h-[380px] lg:h-[400px] rounded-2xl overflow-hidden group cursor-pointer",
+                index % 2 !== 0 ? "lg:translate-y-12" : ""
+              )}
+            >
+              {/* Background Image */}
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              />
 
-                  {/* LinkedIn Button floats up on hover */}
-                  <Link
-                    href={member.linkedin}
-                    className={cn(
-                      "absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full",
-                      "bg-white shadow-lg flex items-center justify-center text-primary-gold",
-                      "opacity-0 translate-y-4 transition-all duration-300 ease-out",
-                      "group-hover:opacity-100 group-hover:translate-y-0",
-                      "hover:bg-primary-gold hover:text-white"
-                    )}
-                    aria-label={`LinkedIn profile for ${member.name}`}
-                  >
-                    <LinkedinIcon size={18} />
-                  </Link>
-                </div>
+              {/* Default Overlay (Gradient at Bottom) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 z-10" />
 
-                {/* Content */}
-                <div className="flex-1 flex flex-col">
-                  <h4 className="font-heading text-xl font-bold text-text-dark mb-1">
-                    {member.name}
-                  </h4>
-                  <p className="text-sm font-medium text-primary-gold mb-4 uppercase tracking-wider">
+              {/* Hover Overlay (Full Dark Tint) */}
+              <div className="absolute inset-0 bg-text-dark/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+
+              <div className="absolute top-6 right-6 w-8 h-8 border-t-[1.5px] border-r-[1.5px] border-primary-gold opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 z-20 pointer-events-none" />
+              <div className="absolute bottom-4 left-4 w-8 h-8 border-b-[1.5px] border-l-[1.5px] border-primary-gold opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 z-20 pointer-events-none" />
+
+              {/* Content Container */}
+              <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end transition-all duration-500">
+                
+                {/* Header (Role & Name) */}
+                <div className="transform transition-transform duration-500 group-hover:-translate-y-4">
+                  <p className="text-primary-gold text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1.5 drop-shadow-sm">
                     {member.role}
                   </p>
-                  
-                  <div className="w-10 h-0.5 bg-black/[0.04] mb-4 group-hover:bg-primary-gold/30 transition-colors" />
-                  
-                  <p className="text-sm text-text-light leading-relaxed">
-                    {member.bio}
-                  </p>
+                  <h3 className="font-cormorant italic text-2xl sm:text-[32px] font-medium text-white drop-shadow-md">
+                    {member.name}
+                  </h3>
                 </div>
-              </Card>
+
+                {/* Expanded Details (Revealed on Hover) */}
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]">
+                  <div className="overflow-hidden">
+                    <div className="w-full h-[1px] bg-primary-gold/30 my-4 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 delay-100" />
+                    
+                    <p className="text-white/90 text-[13px] md:text-sm leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      {member.bio}
+                    </p>
+
+                    {member.quote && (
+                      <p className="font-cormorant italic text-primary-gold/90 text-sm md:text-[15px] leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-250">
+                        &ldquo;{member.quote}&rdquo;
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300 transform translate-y-4 group-hover:translate-y-0">
+                      <Link 
+                        href={member.linkedin}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-primary-gold hover:border-primary-gold text-white text-[13px] font-medium transition-colors"
+                      >
+                        <LinkedinIcon size={14} />
+                        LinkedIn
+                      </Link>
+
+                      {member.portfolio && (
+                        <Link 
+                          href={member.portfolio}
+                          className="w-9 h-9 flex items-center justify-center rounded-full border border-white/20 bg-white/5 hover:bg-primary-gold hover:border-primary-gold text-white transition-colors"
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3.333 8h9.334M8.667 4l4 4-4 4"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </motion.div>
           ))}
         </motion.div>

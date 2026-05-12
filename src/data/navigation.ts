@@ -13,11 +13,11 @@ export interface NavigationData {
 
 export const navigation: NavigationData = {
   links: [
+    { label: "Blog", href: "#blog" },
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
     { label: "About Us", href: "#about" },
-    { label: "Pricing", href: "#pricing" },
     { label: "Contact", href: "#contact" },
   ],
   cta: {
