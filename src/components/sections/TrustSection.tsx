@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
 import { SectionHeading, GoldText, StatsStrip } from "@/components/ui";
-import { ShieldCheck, Star } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { stats } from "@/data/stats";
 import { useMarquee } from "@/hooks/useMarquee";
 import { cn } from "@/lib/utils";
@@ -17,6 +19,9 @@ const clientLogos = [
 ];
 
 export function TrustSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" as `${number}px` });
+
   const marqueeRef = useMarquee<HTMLDivElement>({
     speed: 40,
     direction: "left",
@@ -24,23 +29,34 @@ export function TrustSection() {
   });
 
   return (
-    <section className="py-16 md:py-24 bg-bg-warm overflow-hidden">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-bg-warm overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Section Header */}
-        <SectionHeading
-          badge="TRUSTED BY GROWING BUSINESSES"
-          badgeIcon={<ShieldCheck size={14} />}
-          title={
-            <>
-              Trusted by Startups and <GoldText>Growing Businesses Worldwide</GoldText>
-            </>
-          }
-          align="center"
-          className="mb-12"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <SectionHeading
+            badge="TRUSTED BY GROWING BUSINESSES"
+            badgeIcon={<ShieldCheck size={14} />}
+            title={
+              <>
+                Trusted by Startups and <GoldText>Growing Businesses Worldwide</GoldText>
+              </>
+            }
+            align="center"
+            className="mb-12"
+          />
+        </motion.div>
 
         {/* Marquee Wrapper */}
-        <div className="relative w-full overflow-hidden mb-16 md:mb-20">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="relative w-full overflow-hidden mb-16 md:mb-20"
+        >
           {/* Fading edges */}
           <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-bg-warm to-transparent z-10 pointer-events-none" />
           <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-bg-warm to-transparent z-10 pointer-events-none" />
@@ -72,12 +88,17 @@ export function TrustSection() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats Strip */}
-        <div className="w-full mt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="w-full mt-4"
+        >
           <StatsStrip data={stats} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

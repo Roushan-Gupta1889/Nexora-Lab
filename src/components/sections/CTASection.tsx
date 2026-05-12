@@ -42,7 +42,12 @@ export function CTASection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 p-6 md:p-14 lg:p-16 gap-10 lg:gap-16 relative z-10">
             
             {/* 1. Heading Section */}
-            <div className="flex flex-col justify-center relative z-10 order-1 lg:col-start-1 lg:row-start-1">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="flex flex-col justify-center relative z-10 order-1 lg:col-start-1 lg:row-start-1"
+            >
               
               {/* Badge */}
               <div className="flex items-center gap-3 mb-6">
@@ -63,9 +68,14 @@ export function CTASection() {
               <p className="hidden md:block text-text-light text-base md:text-lg mb-10 leading-relaxed max-w-[500px]">
                 Whether you have questions about features, need technical support, or want to share feedback — our team is ready to assist you.
               </p>
-            </div>
+            </motion.div>
             {/* 3. Contact Cards Section */}
-            <div className="flex flex-col justify-end order-3 lg:col-start-1 lg:row-start-2">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="flex flex-col justify-end order-3 lg:col-start-1 lg:row-start-2"
+            >
               <div className="grid grid-cols-3 lg:grid-cols-1 gap-2 sm:gap-4 max-w-[500px]">
                 
                 <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-2 lg:gap-4 p-3 sm:p-5 rounded-2xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
@@ -99,10 +109,15 @@ export function CTASection() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
             {/* 2. Form Section */}
-            <div className="w-full relative z-10 group order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <motion.div
+              initial={{ opacity: 0, x: 30, scale: 0.97 }}
+              animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: 30, scale: 0.97 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="w-full relative z-10 group order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2"
+            >
               <div className="bg-white rounded-3xl p-8 md:p-10 border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] h-full flex flex-col justify-center relative overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(230,165,32,0.08)] group-hover:border-primary-gold/20">
                 
                 {/* Hover Background Image */}
@@ -177,7 +192,7 @@ export function CTASection() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </motion.div>

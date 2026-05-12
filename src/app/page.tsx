@@ -9,20 +9,49 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { FooterSection } from "@/components/sections/FooterSection";
+import { SectionReveal } from "@/components/layout/SectionReveal";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <TrustSection />
-      <WhyChooseUsSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <ProcessSection />
-      <TestimonialSection />
-      <TeamSection />
-      <FAQSection />
-      <CTASection />
+
+      <SectionReveal>
+        <TrustSection />
+      </SectionReveal>
+
+      <SectionReveal delay={0.05}>
+        <WhyChooseUsSection />
+      </SectionReveal>
+
+      <SectionReveal>
+        <ServicesSection />
+      </SectionReveal>
+
+      <SectionReveal delay={0.05}>
+        <PortfolioSection />
+      </SectionReveal>
+
+      <SectionReveal>
+        <ProcessSection />
+      </SectionReveal>
+
+      <SectionReveal delay={0.05}>
+        <TestimonialSection />
+      </SectionReveal>
+
+      <SectionReveal>
+        <TeamSection />
+      </SectionReveal>
+
+      <SectionReveal delay={0.05}>
+        <FAQSection />
+      </SectionReveal>
+
+      <SectionReveal>
+        <CTASection />
+      </SectionReveal>
+
       <FooterSection />
     </main>
   );

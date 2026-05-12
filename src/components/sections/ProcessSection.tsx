@@ -38,6 +38,7 @@ export function ProcessSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
 
 
@@ -105,18 +106,24 @@ export function ProcessSection() {
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-bg-warm overflow-hidden" id="process">
       <div className="max-w-[1200px] mx-auto px-6">
-        <SectionHeading
-          badge="OUR PROCESS"
-          badgeIcon={<Sparkles size={14} />}
-          title={
-            <>
-              <GoldText>Our Proven Process.</GoldText> Your Success Roadmap.
-            </>
-          }
-          description="A clear, transparent, and collaborative approach to bringing your vision to life, from initial concept to final launch."
-          align="center"
-          className="mb-16 md:mb-24"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <SectionHeading
+            badge="OUR PROCESS"
+            badgeIcon={<Sparkles size={14} />}
+            title={
+              <>
+                <GoldText>Our Proven Process.</GoldText> Your Success Roadmap.
+              </>
+            }
+            description="A clear, transparent, and collaborative approach to bringing your vision to life, from initial concept to final launch."
+            align="center"
+            className="mb-16 md:mb-24"
+          />
+        </motion.div>
 
         {/* Timeline Area */}
         <div ref={timelineRef} className="relative mt-8 md:mt-12">

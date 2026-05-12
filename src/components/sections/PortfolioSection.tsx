@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles, FolderOpen, ExternalLink } from "lucide-react";
 import { SectionHeading, GoldText, Badge, Button, StatsStrip } from "@/components/ui";
 import { projects, portfolioCategories, type PortfolioCategory } from "@/data/portfolio";
@@ -22,21 +22,32 @@ export function PortfolioSection() {
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-white" id="work">
       <div className="max-w-[1200px] mx-auto px-6">
-        <SectionHeading
-          badge="OUR WORK"
-          badgeIcon={<Sparkles size={14} />}
-          title={
-            <>
-              Our Works · <GoldText>Real Projects. Real Results.</GoldText>
-            </>
-          }
-          description="Explore our recent collaborations and see how we've helped brands scale their digital presence."
-          align="center"
-          className="mb-12"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <SectionHeading
+            badge="OUR WORK"
+            badgeIcon={<Sparkles size={14} />}
+            title={
+              <>
+                Our Works · <GoldText>Real Projects. Real Results.</GoldText>
+              </>
+            }
+            description="Explore our recent collaborations and see how we've helped brands scale their digital presence."
+            align="center"
+            className="mb-12"
+          />
+        </motion.div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+          className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-16"
+        >
           {portfolioCategories.map((category) => {
             const isActive = activeCategory === category;
             return (
@@ -61,7 +72,7 @@ export function PortfolioSection() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Portfolio Grid */}
         <motion.div 

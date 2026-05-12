@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Quote, ChevronLeft, ChevronRight, Star, Sparkles } from "lucide-react";
 import { SectionHeading, GoldText, Badge } from "@/components/ui";
 import { testimonials } from "@/data/testimonials";
@@ -12,6 +12,8 @@ export function TestimonialSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const nextTestimonial = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -57,21 +59,32 @@ export function TestimonialSection() {
   const visibleCards = getVisibleCards();
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden" id="testimonials">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-white overflow-hidden" id="testimonials">
       <div className="max-w-[1200px] mx-auto px-6">
-        <SectionHeading
-          badge="CLIENT TESTIMONIALS"
-          badgeIcon={<Sparkles size={14} />}
-          title={
-            <>
-              What Our <GoldText>Clients Say</GoldText>
-            </>
-          }
-          description="Don't just take our word for it. Read what founders and marketing leaders have to say about working with Nexora Labs."
-          align="center"
-          className="mb-16 md:mb-24"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <SectionHeading
+            badge="CLIENT TESTIMONIALS"
+            badgeIcon={<Sparkles size={14} />}
+            title={
+              <>
+                What Our <GoldText>Clients Say</GoldText>
+              </>
+            }
+            description="Don't just take our word for it. Read what founders and marketing leaders have to say about working with Nexora Labs."
+            align="center"
+            className="mb-16 md:mb-24"
+          />
+        </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.98 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
         {/* Testimonials Slider Area */}
         <div 
           className="relative max-w-[1000px] mx-auto mb-16 md:mb-24 h-[450px] sm:h-[400px] md:h-[450px]"
@@ -196,6 +209,7 @@ export function TestimonialSection() {
             </button>
           </div>
         </div>
+        </motion.div>
 
         {/* Dot Indicators */}
         <div className="flex justify-center gap-3">

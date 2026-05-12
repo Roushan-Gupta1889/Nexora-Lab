@@ -1,14 +1,26 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Badge, Button, GoldText } from "@/components/ui";
 import { Sparkles, CheckCircle2 } from "lucide-react";
 import { useTiltEffect } from "@/hooks/useTiltEffect";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { AnimatePresence, motion } from "framer-motion";
+
+const firstWords = ["visitors", "clicks", "traffic", "attention"];
+const secondWords = ["real customers", "conversions", "revenue", "growth"];
 
 export function HeroSection() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % firstWords.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
   const containerRef = useRef<HTMLElement>(null);
   const tiltRef = useTiltEffect<HTMLDivElement>(8);
   const floatRef = useRef<HTMLDivElement>(null);
@@ -80,7 +92,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative pt-[120px] pb-16 md:pt-[160px] md:pb-24 lg:pt-[200px] lg:pb-32 overflow-hidden"
+      className="relative pt-[120px] pb-16 md:pt-[140px] md:pb-20 lg:pt-[50px] lg:pb-16 overflow-hidden"
     >
       {/* Mobile Background Image */}
       <div className="absolute inset-0 z-0 lg:hidden opacity-[0.1] pointer-events-none flex items-center justify-center">
@@ -108,10 +120,43 @@ export function HeroSection() {
 
             <h1
               ref={headingRef}
-              className="font-heading text-text-dark mb-6 tracking-tight"
+              className="font-heading text-text-dark mb-6 tracking-tight leading-[1.2]"
               style={{ opacity: 0 }}
             >
-              We build websites that turn traffic into <GoldText>real customers,</GoldText> not just clicks.
+              We build websites <br />
+              <span className="whitespace-nowrap">
+                that turn{" "}
+                <span className="relative inline-block text-left">
+                  <AnimatePresence mode="popLayout">
+                    <motion.span
+                      key={firstWords[index]}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="inline-block text-primary-gold italic font-bold"
+                    >
+                      {firstWords[index]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>{" "}
+                into
+              </span>
+              <br />
+              <span className="relative inline-block whitespace-nowrap text-left">
+                <AnimatePresence mode="popLayout">
+                  <motion.span
+                    key={secondWords[index]}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="inline-block text-primary-gold italic font-bold"
+                  >
+                    {secondWords[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </h1>
 
             <p
@@ -120,7 +165,7 @@ export function HeroSection() {
               style={{ opacity: 0 }}
             >
               From <GoldText>speed</GoldText> and <GoldText>conversion</GoldText> to{" "}
-              <GoldText>long-term growth</GoldText>, we design and develop digital experiences that scale with your business.
+              <GoldText>long-term growth</GoldText>, we design and develop digital experiences that scales.
             </p>
 
             <div

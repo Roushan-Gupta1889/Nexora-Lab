@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView, type Variants } from "framer-motion";
 import { Plus, Sparkles } from "lucide-react";
 import { SectionHeading, GoldText } from "@/components/ui";
 import { faqItems, type FaqItem } from "@/data/faq";
@@ -56,50 +56,87 @@ function AccordionItem({ item, isOpen, onClick }: { item: FaqItem; isOpen: boole
 
 export function FAQSection() {
   const [openId, setOpenId] = useState<string | null>(faqItems[0]?.id || null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const leftColumn = faqItems.filter(item => item.column === "left");
   const rightColumn = faqItems.filter(item => item.column === "right");
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
+
   return (
-    <section className="py-16 md:py-24 bg-bg-warm" id="faq">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-bg-warm" id="faq">
       <div className="max-w-[1000px] mx-auto px-6">
-        <SectionHeading
-          badge="GOT QUESTIONS?"
-          badgeIcon={<Sparkles size={14} />}
-          title={
-            <>
-              Frequently Asked <GoldText>Questions</GoldText>
-            </>
-          }
-          description="Everything you need to know about our process, pricing, and services. Can't find the answer you're looking for? Reach out to our team."
-          align="center"
-          className="mb-16 md:mb-24"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <SectionHeading
+            badge="GOT QUESTIONS?"
+            badgeIcon={<Sparkles size={14} />}
+            title={
+              <>
+                Frequently Asked <GoldText>Questions</GoldText>
+              </>
+            }
+            description="Everything you need to know about our process, pricing, and services. Can't find the answer you're looking for? Reach out to our team."
+            align="center"
+            className="mb-16 md:mb-24"
+          />
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-start">
           {/* Left Column */}
-          <div className="flex flex-col gap-4">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="flex flex-col gap-4"
+          >
             {leftColumn.map((item) => (
-              <AccordionItem
-                key={item.id}
-                item={item}
-                isOpen={openId === item.id}
-                onClick={() => setOpenId(openId === item.id ? null : item.id)}
-              />
+              <motion.div key={item.id} variants={itemVariants}>
+                <AccordionItem
+                  item={item}
+                  isOpen={openId === item.id}
+                  onClick={() => setOpenId(openId === item.id ? null : item.id)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-4">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="flex flex-col gap-4"
+          >
             {rightColumn.map((item) => (
-              <AccordionItem
-                key={item.id}
-                item={item}
-                isOpen={openId === item.id}
-                onClick={() => setOpenId(openId === item.id ? null : item.id)}
-              />
+              <motion.div key={item.id} variants={itemVariants}>
+                <AccordionItem
+                  item={item}
+                  isOpen={openId === item.id}
+                  onClick={() => setOpenId(openId === item.id ? null : item.id)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
