@@ -175,12 +175,7 @@ export function FooterSection() {
             © {new Date().getFullYear()} Nexora Labs. All rights reserved.
           </p>
           
-          <div className="flex items-center justify-center gap-2">
-            <Sparkles size={16} className="text-[#E6A520]" />
-            <span className="text-[15px] font-medium text-text-dark">
-              Design. Develop. Deliver. <span className="text-[#E6A520]">Grow.</span>
-            </span>
-          </div>
+          
 
           <div className="flex items-center gap-4">
             <Link href="#" className="text-[#6B6B6B] text-[14px] hover:text-[#7A4A00] transition-colors">Privacy Policy</Link>
