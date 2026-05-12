@@ -14,6 +14,7 @@ export function useCountUp<T extends HTMLElement>(
   const ref = useRef<T>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const el = ref.current;
     if (!el) return;
 

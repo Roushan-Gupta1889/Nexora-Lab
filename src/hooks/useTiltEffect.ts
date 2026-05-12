@@ -25,7 +25,7 @@ export function useTiltEffect<T extends HTMLElement>(maxDeg: number = 8) {
       const rotateX = ((y - centerY) / centerY) * -maxDeg;
       const rotateY = ((x - centerX) / centerX) * maxDeg;
 
-      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
       el.style.transition = "transform 0.1s ease-out";
     },
     [maxDeg]
@@ -34,7 +34,7 @@ export function useTiltEffect<T extends HTMLElement>(maxDeg: number = 8) {
   const handleMouseLeave = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+    el.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
     el.style.transition = "transform 0.4s ease-out";
   }, []);
 

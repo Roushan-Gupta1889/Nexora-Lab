@@ -45,7 +45,7 @@ export function TestimonialSection() {
     const len = testimonials.length;
     const prev = (activeIndex - 1 + len) % len;
     const next = (activeIndex + 1) % len;
-    
+
     // On mobile we only show active. On desktop we show 3. 
     // We can just render all 3 and use CSS to position them or flex them.
     // Actually, mapping them in order of rendering:
@@ -85,130 +85,130 @@ export function TestimonialSection() {
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.98 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-        {/* Testimonials Slider Area */}
-        <div 
-          className="relative max-w-[1000px] mx-auto mb-16 md:mb-24 h-[450px] sm:h-[400px] md:h-[450px]"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <AnimatePresence mode="popLayout">
-              {visibleCards.map((card) => {
-                const isActive = card.position === "active";
-                const isPrev = card.position === "prev";
-                const isNext = card.position === "next";
+          {/* Testimonials Slider Area */}
+          <div
+            className="relative max-w-[1000px] mx-auto mb-16 md:mb-24 h-[400px] sm:h-[350px] md:h-[380px]"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="absolute inset-0 flex items-center justify-center">
+              <AnimatePresence mode="popLayout">
+                {visibleCards.map((card) => {
+                  const isActive = card.position === "active";
+                  const isPrev = card.position === "prev";
+                  const isNext = card.position === "next";
 
-                // Animation variants based on position
-                const variants = {
-                  active: {
-                    x: "0%",
-                    scale: 1,
-                    opacity: 1,
-                    zIndex: 30,
-                    filter: "blur(0px)",
-                  },
-                  prev: {
-                    x: "-60%",
-                    scale: 0.85,
-                    opacity: 0.4,
-                    zIndex: 20,
-                    filter: "blur(2px)",
-                  },
-                  next: {
-                    x: "60%",
-                    scale: 0.85,
-                    opacity: 0.4,
-                    zIndex: 20,
-                    filter: "blur(2px)",
-                  },
-                };
+                  // Animation variants based on position
+                  const variants = {
+                    active: {
+                      x: "0%",
+                      scale: 1,
+                      opacity: 1,
+                      zIndex: 30,
+                      filter: "blur(0px)",
+                    },
+                    prev: {
+                      x: "-60%",
+                      scale: 0.85,
+                      opacity: 0.4,
+                      zIndex: 20,
+                      filter: "blur(2px)",
+                    },
+                    next: {
+                      x: "60%",
+                      scale: 0.85,
+                      opacity: 0.4,
+                      zIndex: 20,
+                      filter: "blur(2px)",
+                    },
+                  };
 
-                return (
-                  <motion.div
-                    key={card.id}
-                    layout
-                    initial={false}
-                    animate={variants[card.position as keyof typeof variants]}
-                    transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className={cn(
-                      "absolute w-[90%] sm:w-[500px] md:w-[600px] rounded-[24px] bg-white p-8 md:p-10 text-left",
-                      "border shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-colors duration-300",
-                      isActive ? "border-primary-gold/40" : "border-black/[0.04]",
-                      // Hide prev/next cards completely on mobile to avoid overlap mess, show on md+
-                      !isActive && "hidden md:block cursor-pointer"
-                    )}
-                    onClick={() => {
-                      if (isPrev) prevTestimonial();
-                      if (isNext) nextTestimonial();
-                    }}
-                  >
-                    {/* Top Right Star Badge for Active Card */}
-                    {isActive && (
-                      <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-primary-gold to-secondary-gold rounded-full flex items-center justify-center text-white shadow-lg shadow-primary-gold/30 rotate-12">
-                        <Star size={20} className="fill-white" />
+                  return (
+                    <motion.div
+                      key={card.id}
+                      layout
+                      initial={false}
+                      animate={variants[card.position as keyof typeof variants]}
+                      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className={cn(
+                        "absolute w-[90%] sm:w-[450px] md:w-[500px] rounded-[20px] bg-white p-6 md:p-8 text-left",
+                        "border shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-colors duration-300",
+                        isActive ? "border-primary-gold/40" : "border-black/[0.04]",
+                        // Hide prev/next cards completely on mobile to avoid overlap mess, show on md+
+                        !isActive && "hidden md:block cursor-pointer"
+                      )}
+                      onClick={() => {
+                        if (isPrev) prevTestimonial();
+                        if (isNext) nextTestimonial();
+                      }}
+                    >
+                      {/* Top Right Star Badge for Active Card */}
+                      {isActive && (
+                        <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-br from-primary-gold to-secondary-gold rounded-full flex items-center justify-center text-white shadow-lg shadow-primary-gold/30 rotate-12">
+                          <Star size={16} className="fill-white" />
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-4 mb-5">
+                        <div className="w-10 h-10 rounded-full bg-bg-warm flex items-center justify-center text-primary-gold shrink-0">
+                          <Quote size={16} className="fill-primary-gold" />
+                        </div>
+                        <div className="flex gap-1">
+                          {[...Array(card.rating)].map((_, i) => (
+                            <Star key={i} size={16} className="fill-primary-gold text-primary-gold" />
+                          ))}
+                        </div>
                       </div>
-                    )}
 
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-12 h-12 rounded-full bg-bg-warm flex items-center justify-center text-primary-gold shrink-0">
-                        <Quote size={20} className="fill-primary-gold" />
-                      </div>
-                      <div className="flex gap-1">
-                        {[...Array(card.rating)].map((_, i) => (
-                          <Star key={i} size={18} className="fill-primary-gold text-primary-gold" />
-                        ))}
-                      </div>
-                    </div>
+                      <p className="text-text-dark text-[15px] md:text-base font-medium leading-relaxed mb-6 italic">
+                        "{card.quote}"
+                      </p>
 
-                    <p className="text-text-dark text-lg md:text-xl font-medium leading-relaxed mb-8 italic">
-                      "{card.quote}"
-                    </p>
+                      <div className="w-full h-[1px] bg-black/[0.04] mb-5" />
 
-                    <div className="w-full h-[1px] bg-black/[0.04] mb-6" />
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-12 h-12 rounded-full overflow-hidden border border-black/[0.04]">
+                          <Image
+                            src={card.avatar}
+                            alt={card.name}
+                            fill
+                            className="object-cover"
+                            sizes="48px"
+                          />
+                        </div>
+                        <div>
+                          <h5 className="font-heading font-bold text-text-dark text-[15px] md:text-base">
+                            {card.name}
+                          </h5>
+                          <p className="text-[12px] md:text-[13px] text-text-light font-medium">
+                            {card.role}, <span className="text-primary-gold">{card.company}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
 
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-14 h-14 rounded-full overflow-hidden border border-black/[0.04]">
-                        <Image
-                          src={card.avatar}
-                          alt={card.name}
-                          fill
-                          className="object-cover"
-                          sizes="56px"
-                        />
-                      </div>
-                      <div>
-                        <h5 className="font-heading font-bold text-text-dark text-lg">
-                          {card.name}
-                        </h5>
-                        <p className="text-sm text-text-light font-medium">
-                          {card.role}, <span className="text-primary-gold">{card.company}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+            {/* Navigation Controls */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 md:px-0 z-40 pointer-events-none">
+              <button
+                onClick={(e) => { e.stopPropagation(); prevTestimonial(); }}
+                className="w-12 h-12 rounded-full bg-white border border-black/[0.06] shadow-sm flex items-center justify-center text-text-dark hover:text-primary-gold hover:border-primary-gold/30 hover:shadow-md transition-all pointer-events-auto md:-ml-6 bg-opacity-90 backdrop-blur-sm"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); nextTestimonial(); }}
+                className="w-12 h-12 rounded-full bg-white border border-black/[0.06] shadow-sm flex items-center justify-center text-text-dark hover:text-primary-gold hover:border-primary-gold/30 hover:shadow-md transition-all pointer-events-auto md:-mr-6 bg-opacity-90 backdrop-blur-sm"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
           </div>
-
-          {/* Navigation Controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 md:px-0 z-40 pointer-events-none">
-            <button
-              onClick={(e) => { e.stopPropagation(); prevTestimonial(); }}
-              className="w-12 h-12 rounded-full bg-white border border-black/[0.06] shadow-sm flex items-center justify-center text-text-dark hover:text-primary-gold hover:border-primary-gold/30 hover:shadow-md transition-all pointer-events-auto md:-ml-6 bg-opacity-90 backdrop-blur-sm"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextTestimonial(); }}
-              className="w-12 h-12 rounded-full bg-white border border-black/[0.06] shadow-sm flex items-center justify-center text-text-dark hover:text-primary-gold hover:border-primary-gold/30 hover:shadow-md transition-all pointer-events-auto md:-mr-6 bg-opacity-90 backdrop-blur-sm"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-        </div>
         </motion.div>
 
         {/* Dot Indicators */}

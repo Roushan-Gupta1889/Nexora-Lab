@@ -8,6 +8,7 @@ import { navigation } from "@/data/navigation";
 import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { KineticText } from "@/components/ui/kinetic-text";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,16 +63,16 @@ export function Navbar() {
                   onClick={() => setActiveLink(link.href)}
                   className="relative group py-2"
                 >
-                  <span
+                  <KineticText
+                    as="span"
+                    text={link.label}
                     className={cn(
                       "text-[15px] font-medium transition-colors duration-200",
                       isActive
                         ? "text-primary-gold"
-                        : "text-text-dark hover:text-primary-gold"
+                        : "text-text-dark group-hover:text-primary-gold"
                     )}
-                  >
-                    {link.label}
-                  </span>
+                  />
                   {isActive && (
                     <motion.div
                       layoutId="navIndicator"
@@ -129,12 +130,16 @@ export function Navbar() {
                       setActiveLink(link.href);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={cn(
-                      "text-lg font-medium transition-colors",
-                      isActive ? "text-primary-gold" : "text-text-dark"
-                    )}
+                    className="block group"
                   >
-                    {link.label}
+                    <KineticText
+                      as="span"
+                      text={link.label}
+                      className={cn(
+                        "text-lg font-medium transition-colors duration-200",
+                        isActive ? "text-primary-gold" : "text-text-dark group-hover:text-primary-gold"
+                      )}
+                    />
                   </Link>
                 );
               })}

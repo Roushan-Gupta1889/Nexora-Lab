@@ -14,6 +14,12 @@ export function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
+    // Ensure GSAP plugins are registered safely on the client when DOM is ready
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({
+      start: "top 85%",
+      toggleActions: "play none none none",
+    });
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

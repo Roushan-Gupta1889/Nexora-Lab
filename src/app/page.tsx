@@ -10,6 +10,7 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { SectionReveal } from "@/components/layout/SectionReveal";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export default function Home() {
   return (
@@ -53,6 +54,8 @@ export default function Home() {
       </SectionReveal>
 
       <FooterSection />
+
+      <ScrollToTop />
     </main>
   );
 }

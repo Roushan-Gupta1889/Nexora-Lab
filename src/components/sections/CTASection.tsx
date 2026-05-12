@@ -18,7 +18,7 @@ export function CTASection() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-bg-cream relative" id="contact">
+    <section ref={sectionRef} className="py-12 md:py-16 bg-bg-cream relative" id="contact">
       <div className="max-w-[1200px] mx-auto px-6">
         
         {/* The Main Contact Card */}
@@ -39,7 +39,7 @@ export function CTASection() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 p-6 md:p-14 lg:p-16 gap-10 lg:gap-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 p-5 md:p-8 lg:p-10 gap-6 lg:gap-10 relative z-10">
             
             {/* 1. Heading Section */}
             <motion.div
@@ -59,13 +59,13 @@ export function CTASection() {
               </div>
 
               {/* Heading */}
-              <h2 className="font-heading text-4xl md:text-5xl font-semibold text-text-dark leading-[1.1] mb-2 lg:mb-6">
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-text-dark leading-[1.1] mb-2 lg:mb-4">
                 Got Questions? <br className="hidden md:block"/>
                 <GoldText>We&apos;re Here to Help</GoldText>
               </h2>
 
               {/* Description */}
-              <p className="hidden md:block text-text-light text-base md:text-lg mb-10 leading-relaxed max-w-[500px]">
+              <p className="hidden md:block text-text-light text-sm md:text-base mb-8 leading-relaxed max-w-[450px]">
                 Whether you have questions about features, need technical support, or want to share feedback — our team is ready to assist you.
               </p>
             </motion.div>
@@ -74,37 +74,37 @@ export function CTASection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col justify-end order-3 lg:col-start-1 lg:row-start-2"
+              className="hidden md:flex flex-col justify-end order-3 lg:col-start-1 lg:row-start-2"
             >
-              <div className="grid grid-cols-3 lg:grid-cols-1 gap-2 sm:gap-4 max-w-[500px]">
+              <div className="flex flex-col lg:flex-row gap-2 sm:gap-3 lg:gap-4 max-w-full">
                 
-                <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-2 lg:gap-4 p-3 sm:p-5 rounded-2xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
-                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-[20px] lg:h-[20px]" />
+                <div className="flex-1 flex flex-col items-center text-center gap-1.5 p-2.5 sm:p-3 rounded-xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
+                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-[16px] lg:h-[16px]" />
                   </div>
-                  <div className="flex flex-col items-center lg:items-start">
-                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[15px] leading-tight mb-0.5 lg:mb-0">Email Us</h5>
-                    <p className="text-text-light text-[9px] sm:text-[13px] lg:text-[14px] leading-tight break-all lg:break-normal">labsnexoraa@gmail.com</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-2 lg:gap-4 p-3 sm:p-5 rounded-2xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
-                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-[20px] lg:h-[20px]" />
-                  </div>
-                  <div className="flex flex-col items-center lg:items-start ">
-                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[15px] leading-tight mb-0.5 lg:mb-0">Whatsapp Us</h5>
-                    <p className="text-text-light text-[9px] sm:text-[13px] lg:text-[14px] leading-tight break-words lg:break-normal">+91 7500085107</p>
+                  <div className="flex flex-col items-center">
+                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[13px] leading-tight mb-0.5">Email Us</h5>
+                    <p className="text-text-light text-[9px] sm:text-[11px] lg:text-[12px] leading-tight">labsnexoraa@gmail.com</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-2 lg:gap-4 p-3 sm:p-5 rounded-2xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
-                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-[20px] lg:h-[20px]" />
+                <div className="flex-1 flex flex-col items-center text-center gap-1.5 p-2.5 sm:p-3 rounded-xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
+                    <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-[16px] lg:h-[16px]" />
                   </div>
-                  <div className="flex flex-col items-center lg:items-start">
-                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[15px] leading-tight mb-0.5 lg:mb-0">Response Time</h5>
-                    <p className="text-text-light text-[9px] sm:text-[13px] lg:text-[14px] leading-tight lg:break-normal">Usually within 24 hours</p>
+                  <div className="flex flex-col items-center">
+                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[13px] leading-tight mb-0.5">Whatsapp Us</h5>
+                    <p className="text-text-light text-[9px] sm:text-[11px] lg:text-[12px] leading-tight">+91 7500085107</p>
+                  </div>
+                </div>
+
+                <div className="flex-1 flex flex-col items-center text-center gap-1.5 p-2.5 sm:p-3 rounded-xl bg-white/60 hover:bg-white border border-primary-gold/10 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold shrink-0">
+                    <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-[16px] lg:h-[16px]" />
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <h5 className="font-bold text-text-dark text-[11px] sm:text-[13px] leading-tight mb-0.5">Response Time</h5>
+                    <p className="text-text-light text-[9px] sm:text-[11px] lg:text-[12px] leading-tight">Usually within 24h</p>
                   </div>
                 </div>
 
@@ -118,7 +118,7 @@ export function CTASection() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="w-full relative z-10 group order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2"
             >
-              <div className="bg-white rounded-3xl p-8 md:p-10 border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] h-full flex flex-col justify-center relative overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(230,165,32,0.08)] group-hover:border-primary-gold/20">
+              <div className="bg-white rounded-2xl p-5 md:p-6 border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] h-full flex flex-col justify-center relative overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(230,165,32,0.08)] group-hover:border-primary-gold/20">
                 
                 {/* Hover Background Image */}
                 <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none">
@@ -132,10 +132,10 @@ export function CTASection() {
                 </div>
 
                 <div className="relative z-10">
-                  <h3 className="font-heading text-2xl font-bold text-text-dark mb-2">Send a Message</h3>
-                  <p className="text-text-light text-sm mb-8">Fill out the form and we&apos;ll be in touch.</p>
+                  <h3 className="font-heading text-xl md:text-2xl font-bold text-text-dark mb-1.5">Send a Message</h3>
+                  <p className="text-text-light text-[13px] mb-5">Fill out the form and we&apos;ll be in touch.</p>
 
-                <form className="space-y-4 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-3 sm:space-y-4" onSubmit={(e) => e.preventDefault()}>
                   
                   <div className="grid grid-cols-2 gap-3 sm:gap-5">
                     <div className="space-y-1.5 sm:space-y-2">
@@ -143,26 +143,26 @@ export function CTASection() {
                       <input 
                         type="text" 
                         placeholder="John Doe" 
-                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-sm text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
                       />
                     </div>
                     <div className="space-y-1.5 sm:space-y-2">
                       <label className="text-[11px] sm:text-[13px] font-semibold text-text-dark">Mobile No.</label>
                       <input 
                         type="tel" 
-                        placeholder="+91 0000000000" 
-                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-sm text-text-dark placeholder:text-text-light/70"
+                        placeholder="+1 (555) 000-0000" 
+                        className="w-full px-3 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 sm:gap-5">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     <div className="space-y-1.5 sm:space-y-2">
                       <label className="text-[11px] sm:text-[13px] font-semibold text-text-dark">Email</label>
                       <input 
                         type="email" 
                         placeholder="john@example.com" 
-                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-sm text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
                       />
                     </div>
                     <div className="space-y-1.5 sm:space-y-2">
@@ -170,7 +170,7 @@ export function CTASection() {
                       <input 
                         type="text" 
                         placeholder="How can we help you?" 
-                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-sm text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
                       />
                     </div>
                   </div>
@@ -179,13 +179,13 @@ export function CTASection() {
                     <label className="text-[13px] font-semibold text-text-dark">Message</label>
                     <textarea 
                       placeholder="Tell us more about your inquiry..." 
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-sm text-text-dark placeholder:text-text-light/70 resize-none"
+                      rows={2}
+                      className="w-full px-3 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 resize-none"
                     />
                   </div>
 
-                  <Button variant="primary" size="lg" className="w-full mt-2 group shadow-[0_8px_24px_rgba(230,165,32,0.2)]">
-                    <Send size={18} className="mr-2 opacity-80" />
+                  <Button variant="primary" size="md" className="w-full mt-2 group shadow-[0_8px_24px_rgba(230,165,32,0.2)]">
+                    <Send size={16} className="mr-2 opacity-80" />
                     Send Message
                   </Button>
                 </form>

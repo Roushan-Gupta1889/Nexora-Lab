@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Sparkles
 } from "lucide-react";
-import { SectionHeading, GoldText, IconCircle, Card, Badge, Button } from "@/components/ui";
+import { SectionHeading, GoldText, IconCircle, Card, Badge, Button, Marquee } from "@/components/ui";
 import { services, type Service } from "@/data/services";
 import { useTiltEffect } from "@/hooks/useTiltEffect";
 import { cn } from "@/lib/utils";
@@ -35,30 +35,30 @@ function ServiceCard({ service }: { service: Service }) {
       ref={cardRef}
       variant="bordered"
       className={cn(
-        "relative h-full p-8 group overflow-hidden cursor-pointer",
+        "relative h-full p-6 md:p-7 group overflow-hidden cursor-pointer",
         "hover:border-primary-gold/30 hover:shadow-[0_20px_56px_rgba(230,165,32,0.1)]"
       )}
     >
       <IconCircle
         size="lg"
-        className="mb-8 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(230,165,32,0.3)]"
+        className="mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(230,165,32,0.3)]"
       >
         {iconMap[service.icon]}
       </IconCircle>
 
-      <h3 className="font-heading text-2xl font-semibold text-text-dark mb-4 transition-colors group-hover:text-primary-gold">
+      <h3 className="font-heading text-xl md:text-2xl font-semibold text-text-dark mb-3 transition-colors group-hover:text-primary-gold">
         {service.title}
       </h3>
 
-      <div className="w-12 h-0.5 bg-gradient-to-r from-primary-gold to-secondary-gold mb-5 rounded-full" />
+      <div className="w-10 h-0.5 bg-gradient-to-r from-primary-gold to-secondary-gold mb-4 rounded-full" />
 
-      <p className="text-text-light mb-6">
+      <p className="text-text-light text-sm mb-5 leading-relaxed">
         {service.description}
       </p>
 
-      <ul className="space-y-3 mb-10">
+      <ul className="space-y-2 mb-8">
         {service.bullets.map((bullet, idx) => (
-          <li key={idx} className="flex items-start gap-2 text-sm text-text-dark font-medium">
+          <li key={idx} className="flex items-start gap-2 text-[13px] text-text-dark font-medium">
             <CheckCircle2 size={16} className="text-primary-gold mt-0.5 shrink-0" />
             <span>{bullet}</span>
           </li>
@@ -115,18 +115,20 @@ export function ServicesSection() {
           className="mb-16 md:mb-24"
         />
 
-        {/* Services Grid */}
+        {/* Services Marquee */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 md:mb-20"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-screen max-w-none relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-16 md:mb-20 overflow-hidden"
         >
-          {services.map((service) => (
-            <motion.div key={service.id} variants={itemVariants}>
-              <ServiceCard service={service} />
-            </motion.div>
-          ))}
+          <Marquee pauseOnHover className="[--duration:60s] py-4">
+            {services.map((service) => (
+              <div key={service.id} className="w-[280px] md:w-[320px] h-full shrink-0">
+                <ServiceCard service={service} />
+              </div>
+            ))}
+          </Marquee>
         </motion.div>
 
         {/* Bottom CTA Bar */}

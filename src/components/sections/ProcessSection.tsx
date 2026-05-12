@@ -44,6 +44,7 @@ export function ProcessSection() {
 
   useGSAP(
     () => {
+      gsap.registerPlugin(ScrollTrigger);
       if (!timelineRef.current || !lineRef.current) return;
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -166,12 +167,9 @@ export function ProcessSection() {
 
                 {/* Content */}
                 <div className="flex-1 lg:w-full lg:px-2 pt-2 lg:pt-0">
-                  <h4 className="font-heading text-lg font-bold text-text-dark mb-2">
+                  <h4 className="font-heading text-lg font-bold text-text-dark">
                     {step.title}
                   </h4>
-                  <p className="text-sm text-text-light leading-relaxed">
-                    {step.description}
-                  </p>
                 </div>
               </div>
             ))}

@@ -5,3 +5,4 @@ export { GoldText } from "./GoldText";
 export { IconCircle } from "./IconCircle";
 export { SectionHeading } from "./SectionHeading";
 export { StatsStrip } from "./StatsStrip";
+export { Marquee } from "./marquee";

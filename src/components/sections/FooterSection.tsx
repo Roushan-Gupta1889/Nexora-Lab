@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Mail, Phone, MapPin, Clock, Sparkles } from "lucide-react";
 import { footerData } from "@/data/footer";
+import { Dock, DockIcon } from "@/components/ui/dock";
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   switch (platform) {
@@ -66,18 +67,22 @@ export function FooterSection() {
             <p className="text-text-light text-[15px] leading-relaxed mb-8 max-w-[260px]">
               {footerData.brand.description}
             </p>
-            <div className="flex items-center gap-3">
+            <Dock direction="middle" className="mx-0 mt-0 h-auto justify-start gap-4 border-none bg-transparent p-0 supports-backdrop-blur:bg-transparent shadow-none">
               {footerData.brand.socials.map((social) => (
-                <Link
+                <DockIcon
                   key={social.platform}
-                  href={social.href}
-                  className="w-10 h-10 rounded-full border border-[#E6A520]/30 flex items-center justify-center text-[#B08D46] hover:bg-[#E6A520] hover:text-white hover:border-[#E6A520] transition-all duration-300 shadow-sm"
-                  aria-label={social.platform}
+                  className="border border-[#E6A520]/30 text-[#B08D46] hover:bg-[#E6A520] hover:text-white transition-colors duration-300 shadow-sm"
                 >
-                  <SocialIcon platform={social.platform} />
-                </Link>
+                  <Link
+                    href={social.href}
+                    className="w-full h-full flex items-center justify-center rounded-full"
+                    aria-label={social.platform}
+                  >
+                    <SocialIcon platform={social.platform} />
+                  </Link>
+                </DockIcon>
               ))}
-            </div>
+            </Dock>
           </div>
 
           {/* Quick Links Column */}
