@@ -83,7 +83,7 @@ export function HeroSection() {
       className="relative pt-[120px] pb-16 md:pt-[160px] md:pb-24 lg:pt-[200px] lg:pb-32 overflow-hidden"
     >
       {/* Mobile Background Image */}
-      <div className="absolute inset-0 z-0 lg:hidden opacity-[0.3] pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-0 z-0 lg:hidden opacity-[0.1] pointer-events-none flex items-center justify-center">
         <div className="relative w-full h-full scale-125 sm:scale-100">
           <Image
             src="/images/hero-img copy.png"
