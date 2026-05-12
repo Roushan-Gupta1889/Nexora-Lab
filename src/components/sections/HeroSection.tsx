@@ -82,6 +82,20 @@ export function HeroSection() {
       ref={containerRef}
       className="relative pt-[120px] pb-16 md:pt-[160px] md:pb-24 lg:pt-[200px] lg:pb-32 overflow-hidden"
     >
+      {/* Mobile Background Image */}
+      <div className="absolute inset-0 z-0 lg:hidden opacity-[0.3] pointer-events-none flex items-center justify-center">
+        <div className="relative w-full h-full scale-125 sm:scale-100">
+          <Image
+            src="/images/hero-img copy.png"
+            alt="Hero Background"
+            fill
+            className="object-contain object-center"
+            sizes="100vw"
+            priority
+          />
+        </div>
+      </div>
+
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Column: Text */}
@@ -128,7 +142,7 @@ export function HeroSection() {
           </div>
 
           {/* Right Column: Image */}
-          <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[650px] flex items-center justify-center lg:justify-end">
+          <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[650px] hidden lg:flex items-center justify-center lg:justify-end">
             {/* Gold Gradient Glow */}
             <div className="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] lg:w-[550px] lg:h-[550px] bg-gradient-to-tr from-primary-gold/10 to-secondary-gold/20 rounded-full blur-[80px] pointer-events-none" />
 
