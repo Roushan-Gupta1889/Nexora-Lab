@@ -119,7 +119,7 @@ export function ProcessSection() {
         />
 
         {/* Timeline Area */}
-        <div ref={timelineRef} className="relative mb-20 md:mb-32">
+        <div ref={timelineRef} className="relative mt-8 md:mt-12">
           {/* Desktop Line (Horizontal) */}
           <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[2px] bg-black/[0.06]">
             <div

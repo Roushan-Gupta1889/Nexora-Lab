@@ -198,7 +198,7 @@ export function TestimonialSection() {
         </div>
 
         {/* Dot Indicators */}
-        <div className="flex justify-center gap-3 mb-16">
+        <div className="flex justify-center gap-3">
           {testimonials.map((_, idx) => (
             <button
               key={idx}

@@ -118,8 +118,6 @@ export function CustomCursor() {
           top: `${innerPos.y}px`,
           transform: "translate(-50%, -50%)",
           boxShadow: "0 0 12px rgba(230, 165, 32, 0.6), 0 0 24px rgba(230, 165, 32, 0.3)",
-          transition: isHoveringInteractive ? "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)" : "none",
-          scale: isHoveringInteractive ? 1.5 : 1,
         }}
       />
 
@@ -134,8 +132,7 @@ export function CustomCursor() {
           height: "35px",
           transform: "translate(-50%, -50%)",
           opacity: isHoveringInteractive ? 0.5 : 0.3,
-          transition: isHoveringInteractive ? "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)" : "none",
-          scale: isHoveringInteractive ? 1.8 : 1,
+          transition: "opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
         }}
       />
     </>
