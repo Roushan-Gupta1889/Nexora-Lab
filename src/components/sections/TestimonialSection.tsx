@@ -125,7 +125,7 @@ export function TestimonialSection() {
 
                 return (
                   <motion.div
-                    key={`${card.id}-${card.position}`}
+                    key={card.id}
                     layout
                     initial={false}
                     animate={variants[card.position as keyof typeof variants]}
