@@ -92,7 +92,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative pt-[120px] pb-16 md:pt-[140px] md:pb-20 lg:pt-[50px] lg:pb-16 overflow-hidden"
+      className="relative pt-[140px] pb-16 md:pt-[140px] md:pb-20 lg:pt-[50px] lg:pb-16 overflow-hidden"
     >
       {/* Mobile Background Image */}
       <div className="absolute inset-0 z-0 lg:hidden opacity-[0.1] pointer-events-none flex items-center justify-center">
