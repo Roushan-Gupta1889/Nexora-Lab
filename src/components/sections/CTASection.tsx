@@ -153,7 +153,7 @@ export function CTASection() {
                       <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Mobile No.</label>
                       <input 
                         type="tel" 
-                        placeholder="+91 00000 00000" 
+                        placeholder="+91 " 
                         className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
                       />
                     </div>

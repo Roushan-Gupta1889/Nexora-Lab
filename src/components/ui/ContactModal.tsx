@@ -65,7 +65,7 @@ export function ContactModal() {
                     <label className="text-[12px] font-semibold text-text-dark">Mobile No.</label>
                     <input
                       type="tel"
-                      placeholder="+91 00000 00000"
+                      placeholder="+91 "
                       className="w-full px-4 py-2.5 rounded-xl bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-sm text-text-dark placeholder:text-text-light/60"
                     />
                   </div>
