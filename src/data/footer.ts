@@ -1,6 +1,6 @@
 export const footerData = {
   brand: {
-    description: "Nexora Labs builds high-performance websites and web applications that turn visitors into loyal customers and drive real business growth.",
+    description: "Kivox.in builds high-performance websites and web applications that turn visitors into loyal customers and drive real business growth.",
     socials: [
       { platform: "linkedin", href: "#" },
       { platform: "instagram", href: "#" },
@@ -8,12 +8,12 @@ export const footerData = {
     ],
   },
   quickLinks: [
-    { label: "Home", href: "#home" },
-    { label: "Services", href: "#services" },
-    { label: "Work", href: "#work" },
-    { label: "About Us", href: "#about" },
-    { label: "Blog", href: "#blog" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/#services" },
+    { label: "Work", href: "/#work" },
+    { label: "About Us", href: "/about" },
+    { label: "Blog", href: "/#blog" },
+    { label: "Contact", href: "/#contact" },
   ],
   services: [
     { label: "Custom Website Design", href: "#" },
@@ -23,7 +23,7 @@ export const footerData = {
     { label: "Web Application Development", href: "#" },
   ],
   company: [
-    { label: "About Nexora Labs", href: "#" },
+    { label: "About Kivox.in", href: "/about" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "Blog", href: "#" },
     { label: "Careers", href: "#" },

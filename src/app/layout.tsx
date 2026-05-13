@@ -29,19 +29,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nexora Labs — High-Performance Websites for Startups & Growing Businesses",
+  title: "Kivox.in — High-Performance Websites for Startups & Growing Businesses",
   description:
-    "Nexora Labs is a digital agency specializing in high-performance websites built for speed, conversion, and long-term growth. We help startups and growing businesses scale with strategy-driven web solutions.",
+    "Kivox.in is a modern digital agency specializing in high-performance websites built for speed, conversion, and long-term growth. We help startups and growing businesses scale with strategy-driven web solutions.",
   keywords: [
     "web design",
     "web development",
     "digital agency",
     "startup websites",
     "high-performance websites",
-    "Nexora Labs",
+    "Kivox.in",
   ],
   openGraph: {
-    title: "Nexora Labs — Digital Solutions That Drive Growth",
+    title: "Kivox.in — Digital Solutions That Drive Growth",
     description:
       "We build websites that turn traffic into real customers, not just clicks.",
     type: "website",

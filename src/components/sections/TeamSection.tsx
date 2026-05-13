@@ -59,7 +59,7 @@ export function TeamSection() {
           badgeIcon={<Sparkles size={14} />}
           title={
             <>
-              The Minds Behind <GoldText>Nexora Labs</GoldText>
+              The Minds Behind <GoldText>Kivox.in</GoldText>
             </>
           }
           description="A team of passionate designers, developers, and strategists dedicated to helping your business grow."

@@ -57,7 +57,7 @@ export function WhyChooseUsSection() {
             badgeIcon={<Sparkles size={14} />}
             title={
               <>
-                Why Businesses Choose <GoldText>Nexora Labs</GoldText>
+                Why Businesses Choose <GoldText>Kivox.in</GoldText>
               </>
             }
             description="We combine strategic thinking with technical excellence to build digital experiences that deliver measurable results."

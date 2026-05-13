@@ -58,7 +58,7 @@ export function FooterSection() {
             <Link href="/" className="relative w-[280px] h-20 mb-6 block">
               <Image
               src="/images/logo1.png"
-              alt="Nexora Labs"
+              alt="Kivox.in"
               fill
               className="object-contain object-left scale-150 origin-left"
               sizes="280px"

@@ -74,7 +74,7 @@ export function TestimonialSection() {
                 What Our <GoldText>Clients Say</GoldText>
               </>
             }
-            description="Don't just take our word for it. Read what founders and marketing leaders have to say about working with Nexora Labs."
+            description="Don't just take our word for it. Read what founders and marketing leaders have to say about working with Kivox.in."
             align="center"
             className="mb-16 md:mb-24"
           />
