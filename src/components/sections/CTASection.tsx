@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -8,14 +8,98 @@ import {
   Mail, 
   MessageCircle, 
   Clock, 
-  Send 
+  Send,
+  AlertCircle,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GoldText } from "@/components/ui/GoldText";
 
+// ─── Types ───────────────────────────────────────────────────────────────────
+interface FormData {
+  name: string;
+  mobile: string;
+  email: string;
+  subject: string;
+  service: string;
+  message: string;
+}
+
+const initialFormData: FormData = {
+  name: "",
+  mobile: "",
+  email: "",
+  subject: "",
+  service: "",
+  message: "",
+};
+
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ type: "success" | "error" | null; message: string }>({
+    type: null,
+    message: "",
+  });
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Show toast with auto-dismiss
+  const showToast = (type: "success" | "error", message: string) => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ type, message });
+    toastTimer.current = setTimeout(() => {
+      setToast({ type: null, message: "" });
+    }, 5000);
+  };
+
+  // Handle input changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Client-side validation
+    if (!formData.name.trim()) return showToast("error", "Please enter your name.");
+    if (!formData.mobile.trim() || formData.mobile.trim().length < 10)
+      return showToast("error", "Please enter a valid mobile number.");
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      return showToast("error", "Please enter a valid email address.");
+    if (!formData.subject.trim()) return showToast("error", "Please enter a subject.");
+    if (!formData.service) return showToast("error", "Please select a service.");
+    if (!formData.message.trim() || formData.message.trim().length < 10)
+      return showToast("error", "Message must be at least 10 characters.");
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        showToast("success", result.message || "Message sent successfully!");
+        setFormData(initialFormData);
+      } else {
+        showToast("error", result.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      showToast("error", "Network error. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section ref={sectionRef} className="py-10 md:py-12 bg-bg-cream relative" id="contact">
@@ -138,23 +222,43 @@ export function CTASection() {
                   <h3 className="font-heading text-lg md:text-xl font-bold text-text-dark mb-1">Send a Message</h3>
                   <p className="text-text-light text-[12px] mb-4">Fill out the form and we&apos;ll be in touch.</p>
 
-                <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+                {/* Notification Area */}
+                {toast.message && (
+                  <div className={`mb-4 p-3 rounded-xl text-xs font-semibold flex items-start gap-2 ${
+                    toast.type === "success" 
+                      ? "bg-emerald-50 text-emerald-700 border border-emerald-100" 
+                      : "bg-red-50 text-red-700 border border-red-100"
+                  }`}>
+                    {toast.type === "success" ? <Sparkles size={16} className="shrink-0 mt-0.5" /> : <AlertCircle size={16} className="shrink-0 mt-0.5" />}
+                    {toast.message}
+                  </div>
+                )}
+
+                <form className="space-y-3" onSubmit={handleSubmit}>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="space-y-1">
                       <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Name</label>
                       <input 
                         type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
                         placeholder="John Doe" 
-                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 disabled:opacity-50"
                       />
                     </div>
                     <div className="space-y-1">
                       <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Mobile No.</label>
                       <input 
                         type="tel" 
+                        name="mobile"
+                        value={formData.mobile}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
                         placeholder="+91 " 
-                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -164,16 +268,24 @@ export function CTASection() {
                       <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Email</label>
                       <input 
                         type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
                         placeholder="john@example.com" 
-                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 disabled:opacity-50"
                       />
                     </div>
                     <div className="space-y-1">
                       <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Subject</label>
                       <input 
                         type="text" 
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
                         placeholder="Inquiry Topic" 
-                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70"
+                        className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -181,8 +293,11 @@ export function CTASection() {
                   <div className="space-y-1">
                     <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark uppercase tracking-wider">Service</label>
                     <select 
-                      defaultValue=""
-                      className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark appearance-none cursor-pointer"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark appearance-none cursor-pointer disabled:opacity-50"
                       style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                         backgroundRepeat: 'no-repeat',
@@ -204,15 +319,35 @@ export function CTASection() {
                   <div className="space-y-1">
                     <label className="text-[11px] sm:text-[12px] font-semibold text-text-dark">Message</label>
                     <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
                       placeholder="Tell us more..." 
                       rows={2}
-                      className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 resize-none"
+                      className="w-full px-3 py-2 rounded-lg bg-bg-warm border border-black/[0.04] focus:border-primary-gold focus:ring-1 focus:ring-primary-gold outline-none transition-all text-xs sm:text-[13px] text-text-dark placeholder:text-text-light/70 resize-none disabled:opacity-50"
                     />
                   </div>
 
-                  <Button variant="primary" size="sm" className="w-full mt-2 group shadow-[0_8px_24px_rgba(230,165,32,0.2)]">
-                    <Send size={16} className="mr-2 opacity-80" />
-                    Send Message
+                  <Button 
+                    type="submit"
+                    variant="primary" 
+                    size="sm" 
+                    icon={null}
+                    disabled={isSubmitting}
+                    className="w-full mt-2 group shadow-[0_8px_24px_rgba(230,165,32,0.2)]"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={16} className="mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={16} className="mr-2 opacity-80" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
                 </div>
