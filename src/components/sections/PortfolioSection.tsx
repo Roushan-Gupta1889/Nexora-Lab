@@ -58,24 +58,26 @@ export function PortfolioSection() {
 
         <AnimatePresence>
           {active ? (
-            <div className="fixed inset-0 grid place-items-center z-[101] p-4">
+            <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 sm:p-6">
+              {/* Close Button - Responsive Position */}
               <motion.button
                 key={`button-${active.id}-${id}`}
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                className="flex absolute top-6 right-6 items-center justify-center bg-white rounded-full h-10 w-10 shadow-xl z-[102] hover:bg-primary-gold hover:text-white transition-colors"
+                className="absolute top-4 right-4 md:top-8 md:right-8 items-center justify-center bg-white rounded-full h-9 w-9 md:h-10 md:w-10 shadow-xl z-[102] hover:bg-primary-gold hover:text-white transition-colors"
                 onClick={() => setActive(null)}
               >
-                <X size={20} />
+                <X size={18} className="md:w-5 md:h-5" />
               </motion.button>
+
               <motion.div
                 layoutId={`card-${active.id}-${id}`}
                 ref={ref}
-                className="w-full max-w-[550px] h-fit max-h-[80vh] flex flex-col bg-white rounded-3xl overflow-hidden shadow-2xl"
+                className="relative w-full max-w-[550px] h-fit max-h-[85vh] flex flex-col bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl z-[101]"
               >
-                <motion.div layoutId={`image-${active.id}-${id}`} className="relative h-40 w-full shrink-0">
+                <motion.div layoutId={`image-${active.id}-${id}`} className="relative h-32 sm:h-40 w-full shrink-0">
                   <Image
                     src={active.image}
                     alt={active.title}
@@ -84,8 +86,8 @@ export function PortfolioSection() {
                   />
                 </motion.div>
 
-                <div className="overflow-y-auto custom-scrollbar">
-                  <div className="flex justify-between items-start p-6 md:p-7">
+                <div className="overflow-y-auto custom-scrollbar bg-white">
+                  <div className="flex flex-col sm:flex-row justify-between items-start p-5 sm:p-7 gap-4">
                     <div>
                       <motion.div 
                         layoutId={`category-${active.id}-${id}`}
@@ -105,18 +107,18 @@ export function PortfolioSection() {
                       layoutId={`button-${active.id}-${id}`}
                       href={active.link}
                       target="_blank"
-                      className="px-5 py-2.5 text-xs rounded-full font-bold bg-primary-gold text-white shadow-lg shadow-primary-gold/20 hover:bg-dark-gold transition-all"
+                      className="w-full sm:w-auto text-center px-5 py-2.5 text-xs rounded-full font-bold bg-primary-gold text-white shadow-lg shadow-primary-gold/20 hover:bg-dark-gold transition-all"
                     >
                       Visit Project
                     </motion.a>
                   </div>
-                  <div className="px-6 md:px-7 pb-7">
+                  <div className="px-5 sm:px-7 pb-7">
                     <motion.div
                       layout
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="text-text-light text-xs md:text-sm leading-relaxed flex flex-col gap-3"
+                      className="text-text-light text-[11px] sm:text-xs md:text-sm leading-relaxed flex flex-col gap-3"
                     >
                       <p>{active.description}</p>
                       <p>

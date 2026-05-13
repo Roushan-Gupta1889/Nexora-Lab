@@ -21,9 +21,11 @@ export default function Home() {
         <TrustSection />
       </SectionReveal>
 
-      <SectionReveal delay={0.05}>
-        <WhyChooseUsSection />
-      </SectionReveal>
+      <div className="hidden md:block">
+        <SectionReveal delay={0.05}>
+          <WhyChooseUsSection />
+        </SectionReveal>
+      </div>
 
       <SectionReveal>
         <ServicesSection />

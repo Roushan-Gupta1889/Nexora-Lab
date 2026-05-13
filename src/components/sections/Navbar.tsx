@@ -100,7 +100,7 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden flex items-center justify-center p-2 text-text-dark hover:text-primary-gold transition-colors"
+            className="md:hidden relative z-50 flex items-center justify-center p-3 -mr-3 text-text-dark hover:text-primary-gold transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >

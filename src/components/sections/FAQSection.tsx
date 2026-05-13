@@ -127,7 +127,7 @@ export function FAQSection() {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-col gap-4"
+            className="hidden md:flex flex-col gap-4"
           >
             {rightColumn.map((item) => (
               <motion.div key={item.id} variants={itemVariants}>
