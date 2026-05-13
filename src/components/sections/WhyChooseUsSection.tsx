@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { Target, Zap, Smartphone, Shield, Sparkles } from "lucide-react";
 import { SectionHeading, GoldText } from "@/components/ui";
 import { CardHoverEffect } from "@/components/ui/CardHoverEffect";
@@ -17,6 +17,24 @@ const iconMap: Record<string, React.ReactNode> = {
 export function WhyChooseUsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" as `${number}px` });
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.5, delayChildren: 0.3 },
+    },
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, x: 60, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
 
   // Map features data into the format CardHoverEffect expects
   const hoverItems = whyChooseUsFeatures.map((feature) => ({
@@ -49,13 +67,14 @@ export function WhyChooseUsSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
         >
-          <CardHoverEffect items={hoverItems} />
+          <CardHoverEffect items={hoverItems} cardVariants={cardVariants} />
         </motion.div>
       </div>
     </section>
   );
 }
+

@@ -10,49 +10,33 @@ export const processSteps: ProcessStep[] = [
   {
     id: "discover",
     number: "01",
-    icon: "users",
-    title: "Discover & Plan",
+    icon: "message",
+    title: "Discovery Call",
     description:
-      "We learn about your business, goals, and target audience to create a strategic plan that sets the right foundation.",
+      "We learn about your business, goals, and audience to understand exactly what you need.",
   },
   {
-    id: "design",
+    id: "strategy",
     number: "02",
-    icon: "edit",
-    title: "Design & Wireframe",
+    icon: "file",
+    title: "Strategy & Plan",
     description:
-      "We create user-focused wireframes and stunning designs that reflect your brand and engage users.",
+      "We create a clear plan — structure, content flow, and design direction that supports your goals.",
   },
   {
     id: "develop",
     number: "03",
     icon: "code",
-    title: "Develop & Build",
+    title: "Design & Development",
     description:
-      "Our developers bring the design to life with clean, scalable code and modern technologies.",
-  },
-  {
-    id: "test",
-    number: "04",
-    icon: "settings",
-    title: "Test & Optimize",
-    description:
-      "We thoroughly test across devices and browsers to ensure speed, security, and a flawless experience.",
+      "We design and build a fast, modern, and responsive website that represents your brand perfectly.",
   },
   {
     id: "launch",
-    number: "05",
+    number: "04",
     icon: "rocket",
-    title: "Launch & Deploy",
+    title: "Launch & Support",
     description:
-      "We launch your website seamlessly and ensure everything is optimized for performance from day one.",
-  },
-  {
-    id: "support",
-    number: "06",
-    icon: "headphones",
-    title: "Support & Grow",
-    description:
-      "We provide ongoing support and continuous improvements to help your business grow and stay ahead.",
+      "We launch your website and provide ongoing support to help you grow and scale with confidence.",
   },
 ];

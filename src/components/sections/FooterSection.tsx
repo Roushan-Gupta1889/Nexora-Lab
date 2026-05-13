@@ -57,7 +57,7 @@ export function FooterSection() {
           <div className="lg:col-span-3 flex flex-col">
             <Link href="/" className="relative w-[280px] h-20 mb-6 block">
               <Image
-              src="/images/logo.png"
+              src="/images/logo1.png"
               alt="Nexora Labs"
               fill
               className="object-contain object-left scale-150 origin-left"

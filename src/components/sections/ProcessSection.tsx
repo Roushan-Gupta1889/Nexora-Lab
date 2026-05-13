@@ -1,108 +1,46 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "@/lib/gsap";
+import { motion, useInView, type Variants } from "framer-motion";
 import {
-  Users,
-  PenTool,
+  MessageCircle,
+  FileText,
   Code2,
-  Settings,
   Rocket,
-  Headphones,
-  Target,
-  MessageSquare,
-  Award,
-  TrendingUp,
   Sparkles,
 } from "lucide-react";
-import { SectionHeading, GoldText, IconCircle, Card } from "@/components/ui";
+import { SectionHeading, GoldText } from "@/components/ui";
 import { processSteps } from "@/data/process";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ReactNode> = {
-  users: <Users size={20} />,
-  edit: <PenTool size={20} />,
-  code: <Code2 size={20} />,
-  settings: <Settings size={20} />,
-  rocket: <Rocket size={20} />,
-  headphones: <Headphones size={20} />,
+  message: <MessageCircle size={22} />,
+  file: <FileText size={22} />,
+  code: <Code2 size={22} />,
+  rocket: <Rocket size={22} />,
 };
-
-
 
 export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-
-
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-      if (!timelineRef.current || !lineRef.current) return;
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.set(lineRef.current, { width: "100%", height: "100%" });
-        gsap.set(stepsRef.current, { opacity: 1, scale: 1, y: 0 });
-        return;
-      }
-
-      // Check if mobile (vertical layout) or desktop (horizontal layout)
-      const isDesktop = window.innerWidth >= 1024;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 75%",
-          end: "bottom 50%",
-          // If we want scrub, we can use scrub: 1. But the plan says "draws on scroll" and "Steps appear".
-          // A one-time play with duration is smoother than scrub for entering.
-          toggleActions: "play none none none",
-        },
-      });
-
-      // Animate line
-      if (isDesktop) {
-        tl.fromTo(
-          lineRef.current,
-          { width: "0%" },
-          { width: "100%", duration: 2, ease: "power1.inOut" }
-        );
-      } else {
-        tl.fromTo(
-          lineRef.current,
-          { height: "0%" },
-          { height: "100%", duration: 2, ease: "power1.inOut" }
-        );
-      }
-
-      // Animate steps appearing along the line
-      // Calculate stagger based on the line drawing time
-      const staggerTime = 2 / processSteps.length;
-      
-      tl.fromTo(
-        stepsRef.current,
-        { opacity: 0, scale: 0.8, y: 20 },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: staggerTime,
-          ease: "back.out(1.7)",
-        },
-        // Start staggering steps slightly after the line starts drawing
-        "-=1.9"
-      );
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.5, delayChildren: 0.3 },
     },
-    { scope: sectionRef }
-  );
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, x: 60, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-bg-warm overflow-hidden" id="process">
@@ -117,66 +55,87 @@ export function ProcessSection() {
             badgeIcon={<Sparkles size={14} />}
             title={
               <>
-                <GoldText>Our Proven Process.</GoldText> Your Success Roadmap.
+                A <GoldText>Simple</GoldText> Process.{"\n"}
+                Built Around Results.
               </>
             }
-            description="A clear, transparent, and collaborative approach to bringing your vision to life, from initial concept to final launch."
+            description="We keep things clear, collaborative, and focused on delivering websites that drive real business growth."
             align="center"
-            className="mb-16 md:mb-24"
+            className="mb-16 md:mb-20"
           />
         </motion.div>
 
-        {/* Timeline Area */}
-        <div ref={timelineRef} className="relative mt-8 md:mt-12">
-          {/* Desktop Line (Horizontal) */}
-          <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[2px] bg-black/[0.06]">
-            <div
-              ref={lineRef}
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary-gold to-secondary-gold w-0"
-            />
-          </div>
+        {/* Decorative Dots */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex items-center justify-center gap-2 -mt-10 mb-12"
+        >
+          <div className="w-12 h-[2px] bg-primary-gold/30" />
+          <div className="w-2 h-2 rounded-full bg-primary-gold" />
+          <div className="w-12 h-[2px] bg-primary-gold/30" />
+        </motion.div>
 
-          {/* Mobile Line (Vertical) */}
-          <div className="lg:hidden absolute top-[5%] bottom-[5%] left-[44px] w-[2px] bg-black/[0.06]">
-            <div
-              ref={lineRef}
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary-gold to-secondary-gold h-0"
-            />
-          </div>
+        {/* Process Cards Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 relative"
+        >
+          {processSteps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              variants={cardVariants}
+              className="relative"
+            >
+              {/* Dashed Connector (between cards, not after last) */}
+              {index < processSteps.length - 1 && (
+                <div className="hidden lg:block absolute top-[28px] -right-[1px] w-[2px] h-[calc(100%-56px)] z-10">
+                  <div className="w-full h-full border-r-[2px] border-dashed border-primary-gold/40" />
+                </div>
+              )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 lg:gap-4 relative z-10">
-            {processSteps.map((step, index) => (
+              {/* Card */}
               <div
-                key={step.id}
-                ref={(el) => {
-                  stepsRef.current[index] = el;
-                }}
-                className="flex flex-row lg:flex-col items-start lg:items-center text-left lg:text-center relative group"
+                className={cn(
+                  "relative bg-white border border-black/[0.06] p-6 lg:p-8 h-full",
+                  "transition-all duration-300 hover:shadow-[0_8px_30px_rgba(230,165,32,0.08)] hover:border-primary-gold/20",
+                  index === 0 && "rounded-l-2xl",
+                  index === processSteps.length - 1 && "rounded-r-2xl",
+                  // Mobile: round all cards
+                  "max-lg:rounded-2xl"
+                )}
               >
-                {/* Circle Marker */}
-                <div className="shrink-0 w-[88px] flex flex-col items-center mr-6 lg:mr-0 lg:mb-6">
-                  <div className="w-[88px] h-[88px] rounded-full bg-white border border-black/[0.08] shadow-sm flex items-center justify-center mb-3 group-hover:border-primary-gold/40 group-hover:shadow-[0_0_20px_rgba(230,165,32,0.15)] transition-all duration-300 relative z-10">
-                    <span className="absolute top-2 right-2 text-xs font-bold text-primary-gold">
-                      {step.number}
-                    </span>
-                    <div className="text-primary-gold/80 group-hover:text-primary-gold transition-colors duration-300">
-                      {iconMap[step.icon]}
-                    </div>
-                  </div>
+                {/* Step Number Circle */}
+                <div className="w-12 h-12 rounded-full border-[1.5px] border-primary-gold/50 flex items-center justify-center mb-6">
+                  <span className="text-primary-gold font-heading font-bold text-base">
+                    {step.number}
+                  </span>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 lg:w-full lg:px-2 pt-2 lg:pt-0">
-                  <h4 className="font-heading text-lg font-bold text-text-dark">
-                    {step.title}
-                  </h4>
+                {/* Icon */}
+                <div className="text-primary-gold mb-6">
+                  {iconMap[step.icon]}
                 </div>
+
+                {/* Title */}
+                <h4 className="font-heading text-xl font-bold text-text-dark mb-4">
+                  {step.title}
+                </h4>
+
+                {/* Divider */}
+                <div className="w-8 h-[2px] bg-primary-gold/40 mb-4" />
+
+                {/* Description */}
+                <p className="text-text-light text-sm leading-relaxed">
+                  {step.description}
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-
-
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

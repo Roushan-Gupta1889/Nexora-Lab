@@ -40,14 +40,14 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative flex items-center shrink-0" onClick={() => setActiveLink("#home")}>
-            <div className="relative w-64 h-16 md:w-80 md:h-20">
+            <div className="relative w-72 h-20 md:w-[400px] md:h-24">
               <Image
-                src="/images/logo.png"
+                src="/images/logo1.png"
                 alt="Nexora Labs"
                 fill
-                className="object-contain object-left scale-[1.15] md:scale-[1.25] origin-left"
+                className="object-contain object-left scale-[1.25] md:scale-[1.4] origin-left"
                 priority
-                sizes="(max-width: 768px) 256px, 320px"
+                sizes="(max-width: 768px) 288px, 400px"
               />
             </div>
           </Link>

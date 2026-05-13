@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface HoverEffectItem {
@@ -14,6 +14,7 @@ interface HoverEffectItem {
 interface CardHoverEffectProps {
   items: HoverEffectItem[];
   className?: string;
+  cardVariants?: Variants;
 }
 
 /**
@@ -21,8 +22,10 @@ interface CardHoverEffectProps {
  * When hovering a card, a gold spotlight background animates behind it
  * while sibling cards subtly dim.
  */
-export function CardHoverEffect({ items, className }: CardHoverEffectProps) {
+export function CardHoverEffect({ items, className, cardVariants }: CardHoverEffectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const Wrapper = cardVariants ? motion.div : "div";
 
   return (
     <div
@@ -32,8 +35,9 @@ export function CardHoverEffect({ items, className }: CardHoverEffectProps) {
       )}
     >
       {items.map((item, idx) => (
-        <div
+        <Wrapper
           key={item.id}
+          {...(cardVariants ? { variants: cardVariants } : {})}
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -107,8 +111,9 @@ export function CardHoverEffect({ items, className }: CardHoverEffectProps) {
               {item.description}
             </p>
           </div>
-        </div>
+        </Wrapper>
       ))}
     </div>
   );
 }
+

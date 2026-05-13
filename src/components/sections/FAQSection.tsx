@@ -17,22 +17,22 @@ function AccordionItem({ item, isOpen, onClick }: { item: FaqItem; isOpen: boole
     >
       <button
         onClick={onClick}
-        className="w-full flex items-center justify-between px-6 py-5 text-left bg-transparent"
+        className="w-full flex items-center justify-between px-5 py-4 text-left bg-transparent"
         aria-expanded={isOpen}
       >
         <span className={cn(
-          "font-heading font-semibold text-lg transition-colors duration-300 pr-4",
+          "font-heading font-semibold text-base transition-colors duration-300 pr-4",
           isOpen ? "text-primary-gold" : "text-text-dark"
         )}>
           {item.question}
         </span>
         <div
           className={cn(
-            "shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+            "shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300",
             isOpen ? "bg-primary-gold text-white rotate-45" : "bg-bg-warm text-text-dark"
           )}
         >
-          <Plus size={18} />
+          <Plus size={16} />
         </div>
       </button>
 
@@ -44,7 +44,7 @@ function AccordionItem({ item, isOpen, onClick }: { item: FaqItem; isOpen: boole
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="px-6 pb-6 pt-2 text-text-light leading-relaxed border-t border-black/[0.02]">
+            <div className="px-5 pb-5 pt-1 text-text-light text-sm leading-relaxed border-t border-black/[0.02]">
               {item.answer}
             </div>
           </motion.div>
@@ -55,7 +55,7 @@ function AccordionItem({ item, isOpen, onClick }: { item: FaqItem; isOpen: boole
 }
 
 export function FAQSection() {
-  const [openId, setOpenId] = useState<string | null>(faqItems[0]?.id || null);
+  const [openId, setOpenId] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
@@ -80,7 +80,7 @@ export function FAQSection() {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-bg-warm" id="faq">
+    <section ref={sectionRef} className="py-12 md:py-20 bg-bg-warm" id="faq">
       <div className="max-w-[1000px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -97,7 +97,7 @@ export function FAQSection() {
             }
             description="Everything you need to know about our process, pricing, and services. Can't find the answer you're looking for? Reach out to our team."
             align="center"
-            className="mb-16 md:mb-24"
+            className="mb-12 md:mb-16"
           />
         </motion.div>
 
