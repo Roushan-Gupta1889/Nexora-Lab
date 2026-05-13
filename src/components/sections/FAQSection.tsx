@@ -11,25 +11,27 @@ function AccordionItem({ item, isOpen, onClick }: { item: FaqItem; isOpen: boole
   return (
     <div
       className={cn(
-        "bg-white border rounded-2xl overflow-hidden transition-all duration-300",
-        isOpen ? "border-primary-gold/30 shadow-[0_8px_30px_rgba(230,165,32,0.06)]" : "border-black/[0.04] hover:border-black/10"
+        "bg-white border rounded-2xl overflow-hidden transition-all duration-300 group cursor-pointer",
+        isOpen 
+          ? "border-primary-gold/30 shadow-[0_8px_30px_rgba(230,165,32,0.06)] scale-[1.01]" 
+          : "border-black/[0.04] hover:border-primary-gold/20 hover:shadow-md hover:-translate-y-0.5"
       )}
     >
       <button
         onClick={onClick}
-        className="w-full flex items-center justify-between px-5 py-4 text-left bg-transparent"
+        className="w-full flex items-center justify-between px-5 py-4 text-left bg-transparent outline-none"
         aria-expanded={isOpen}
       >
         <span className={cn(
           "font-heading font-semibold text-base transition-colors duration-300 pr-4",
-          isOpen ? "text-primary-gold" : "text-text-dark"
+          isOpen ? "text-primary-gold" : "text-text-dark group-hover:text-primary-gold/80"
         )}>
           {item.question}
         </span>
         <div
           className={cn(
             "shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300",
-            isOpen ? "bg-primary-gold text-white rotate-45" : "bg-bg-warm text-text-dark"
+            isOpen ? "bg-primary-gold text-white rotate-45 shadow-[0_0_10px_rgba(230,165,32,0.3)]" : "bg-bg-warm text-text-dark group-hover:bg-primary-gold/10 group-hover:text-primary-gold"
           )}
         >
           <Plus size={16} />

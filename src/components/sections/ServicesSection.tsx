@@ -16,6 +16,7 @@ import {
 import { SectionHeading, GoldText, IconCircle, Card, Badge, Button, Marquee } from "@/components/ui";
 import { services, type Service } from "@/data/services";
 import { useTiltEffect } from "@/hooks/useTiltEffect";
+import { useContactModal } from "@/context/ContactModalContext";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -78,6 +79,7 @@ function ServiceCard({ service }: { service: Service }) {
 }
 
 export function ServicesSection() {
+  const { openModal } = useContactModal();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -153,7 +155,7 @@ export function ServicesSection() {
             </div>
           </div>
           <div className="shrink-0 w-full md:w-auto">
-            <Button variant="primary" size="lg" className="w-full md:w-auto">
+            <Button variant="primary" size="lg" className="w-full md:w-auto" onClick={() => openModal()}>
               Start Your Project
             </Button>
           </div>

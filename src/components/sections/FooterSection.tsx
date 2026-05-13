@@ -177,7 +177,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6">
           <p className="text-[#6B6B6B] text-[14px]">
-            © {new Date().getFullYear()} Nexora Labs. All rights reserved.
+            © {new Date().getFullYear()} Kivox.in. All rights reserved.
           </p>
           
           

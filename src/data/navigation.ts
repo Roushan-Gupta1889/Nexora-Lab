@@ -13,15 +13,15 @@ export interface NavigationData {
 
 export const navigation: NavigationData = {
   links: [
-    { label: "Blog", href: "#blog" },
     { label: "Home", href: "/" },
     { label: "Services", href: "/#services" },
     { label: "Work", href: "/#work" },
+    { label: "Blog", href: "/blog" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/#contact" },
   ],
   cta: {
-    label: "Let's Work Together",
+    label: "Let's Start With Us",
     href: "#contact",
   },
 };

@@ -9,11 +9,13 @@ import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { KineticText } from "@/components/ui/kinetic-text";
+import { useContactModal } from "@/context/ContactModalContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(navigation.links[0].href);
+  const { openModal } = useContactModal();
 
   // Handle scroll to add glassmorphism effect
   useEffect(() => {
@@ -91,11 +93,9 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex shrink-0">
-            <Link href={navigation.cta.href}>
-              <Button variant="primary" size="sm">
-                {navigation.cta.label}
-              </Button>
-            </Link>
+            <Button variant="primary" size="sm" onClick={() => openModal()}>
+              {navigation.cta.label}
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -144,11 +144,9 @@ export function Navbar() {
                 );
               })}
               <div className="pt-4 pb-2">
-                <Link href={navigation.cta.href} onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="primary" size="md" className="w-full">
-                    {navigation.cta.label}
-                  </Button>
-                </Link>
+                <Button variant="primary" size="md" className="w-full" onClick={() => { openModal(); setIsMobileMenuOpen(false); }}>
+                  {navigation.cta.label}
+                </Button>
               </div>
             </nav>
           </motion.div>

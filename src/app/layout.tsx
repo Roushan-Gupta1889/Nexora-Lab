@@ -3,6 +3,8 @@ import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { CustomCursor } from "@/components/layout/CustomCursor";
 import { Navbar } from "@/components/sections/Navbar";
+import { ContactModalProvider } from "@/context/ContactModalContext";
+import { ContactModal } from "@/components/ui/ContactModal";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -62,11 +64,14 @@ export default function RootLayout({
         className="min-h-full bg-bg-cream text-text-dark font-body antialiased"
         suppressHydrationWarning
       >
-        <SmoothScrollProvider>
-          <CustomCursor />
-          <Navbar />
-          {children}
-        </SmoothScrollProvider>
+        <ContactModalProvider>
+          <SmoothScrollProvider>
+            <CustomCursor />
+            <Navbar />
+            {children}
+            <ContactModal />
+          </SmoothScrollProvider>
+        </ContactModalProvider>
       </body>
     </html>
   );

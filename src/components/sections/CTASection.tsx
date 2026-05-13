@@ -29,7 +29,10 @@ export function CTASection() {
           className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-[#FFFDF9] to-[#FDF4E3] border border-primary-gold/15 shadow-[0_20px_80px_rgba(230,165,32,0.08)]"
         >
           {/* Main Background Image */}
-          <div className="hidden md:block absolute right-0 bottom-0 w-full h-full md:w-[80%] z-0 opacity-[0.50] pointer-events-none">
+          <div 
+            className="hidden md:block absolute right-0 bottom-0 w-full h-full md:w-[80%] z-0 opacity-[0.50] pointer-events-none"
+            style={{ animation: 'teamFloat 6s ease-in-out infinite' }}
+          >
             <Image
               src="/images/cta-img-section.png"
               alt="Background"

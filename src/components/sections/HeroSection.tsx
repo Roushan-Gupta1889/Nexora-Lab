@@ -2,9 +2,11 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Badge, Button, GoldText } from "@/components/ui";
 import { Sparkles, CheckCircle2 } from "lucide-react";
 import { useTiltEffect } from "@/hooks/useTiltEffect";
+import { useContactModal } from "@/context/ContactModalContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +16,7 @@ const secondWords = ["real customers", "conversions", "revenue", "growth"];
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -172,16 +175,18 @@ export function HeroSection() {
               ref={buttonsRef}
               className="flex flex-col sm:flex-row items-center gap-4 mb-8 w-full sm:w-auto"
             >
-              <Button variant="primary" size="lg" className="w-full sm:w-auto">
+              <Button variant="primary" size="lg" className="w-full sm:w-auto" onClick={() => openModal()}>
                 Book a Free Strategy Call
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto text-text-dark bg-white"
-              >
-                Explore Our Work
-              </Button>
+              <Link href="#work" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto text-text-dark bg-white"
+                >
+                  Explore Our Work
+                </Button>
+              </Link>
             </div>
 
           </div>

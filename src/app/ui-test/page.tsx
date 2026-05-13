@@ -51,7 +51,7 @@ export default function UITestPage() {
                 Small Button
               </Button>
               <Button variant="primary" size="md">
-                Book a Free Strategy Call
+                Free Strategy CallBook a 
               </Button>
               <Button variant="primary" size="lg">
                 Start Your Project

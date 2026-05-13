@@ -179,6 +179,16 @@ h4 { font-size: clamp(18px, 2vw, 22px); font-weight: 500; line-height: 1.3; }
    REDUCED MOTION
    ======================================== */
 
+/* Team Floating Animation */
+@keyframes teamFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

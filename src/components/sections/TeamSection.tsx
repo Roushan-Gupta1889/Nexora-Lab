@@ -81,6 +81,9 @@ export function TeamSection() {
                 "relative w-full h-[350px] sm:h-[380px] lg:h-[400px] rounded-2xl overflow-hidden group cursor-pointer",
                 index % 2 !== 0 ? "lg:translate-y-12" : ""
               )}
+              style={{
+                animation: `teamFloat 4s ease-in-out ${index * 0.6}s infinite`,
+              }}
             >
               {/* Background Image */}
               <Image
