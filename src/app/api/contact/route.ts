@@ -344,28 +344,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send both emails in parallel via Resend
-    const resend = new Resend(apiKey);
+// Send both emails in parallel via Resend
+const resend = new Resend(apiKey);
 
-    const [adminResult, autoReplyResult] = await Promise.allSettled([
-      // 1. Admin notification email
-      resend.emails.send({
-        from: "Kivox.in Contact <onboarding@resend.dev>",
-        to: ["roushanguptajan01@gmail.com"],
-        subject: `New Inquiry: ${data.subject} — from ${data.name}`,
-        html: buildEmailHtml(data),
-        replyTo: data.email,
-      }),
-      // 2. Auto-reply to the user
-      resend.emails.send({
-        from: "Kivox.in <onboarding@resend.dev>",
-        // to: [data.email],
-        to: ["roushanguptajan01@gmail.com"],
-        subject: `Thank you for contacting Kivox.in, ${data.name}!`,
-        html: buildAutoReplyHtml(data.name),
-        replyTo: "roushanguptajan01@gmail.com",
-      }),
-    ]);
+const [adminResult, autoReplyResult] = await Promise.allSettled([
+  // 1. Admin notification email
+  resend.emails.send({
+    from: "Kivox.in <hello@kivox.in>",
+    to: ["kivox.contact@gmail.com"],
+
+    subject: `New Inquiry: ${data.subject} — from ${data.name}`,
+
+    html: buildEmailHtml(data),
+
+    // When YOU click reply
+    replyTo: data.email,
+  }),
+
+  // 2. Auto-reply email to client
+  resend.emails.send({
+    from: "Kivox.in <hello@kivox.in>",
+
+    // Send to actual client
+    to: [data.email],
+
+    subject: `Thank you for contacting Kivox.in, ${data.name}!`,
+
+    html: buildAutoReplyHtml(data.name),
+
+    // When CLIENT clicks reply
+    replyTo: "kivox.contact@gmail.com",
+  }),
+]);
 
     // Check if admin notification failed (critical)
     if (
@@ -376,9 +386,9 @@ export async function POST(request: NextRequest) {
         adminResult.status === "rejected"
           ? adminResult.reason
           : adminResult.value.error;
-      console.error("Admin email error:", err);
+      console.error("Admin email error:", JSON.stringify(err, null, 2));
       return NextResponse.json(
-        { success: false, error: "Failed to send email. Please try again." },
+        { success: false, error: `Failed to send email: ${err?.message || "Unknown error"}` },
         { status: 500 }
       );
     }

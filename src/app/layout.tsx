@@ -58,10 +58,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} h-full`}
+      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} h-full overflow-x-hidden`}
     >
       <body
-        className="min-h-full bg-bg-cream text-text-dark font-body antialiased"
+        className="min-h-full bg-bg-cream text-text-dark font-body antialiased overflow-x-hidden"
         suppressHydrationWarning
       >
         <ContactModalProvider>
