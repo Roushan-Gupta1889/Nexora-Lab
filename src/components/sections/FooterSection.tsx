@@ -43,10 +43,18 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 
 export function FooterSection() {
   return (
-    <footer className="bg-[#FCF9F2] pt-24 pb-8 text-text-dark overflow-hidden relative border-t border-black/[0.04]">
+    <footer className="pt-24 pb-8 text-text-dark overflow-hidden relative border-t border-black/[0.04]">
       
-      {/* Decorative subtle gradient background */} 
-      <div className="absolute bottom-0 right-0 w-full h-[500px] bg-gradient-to-tl from-[#FDEFD8]/60 to-transparent pointer-events-none" />
+      {/* Footer Background Image */}
+      <div className="absolute inset-0 -z-10 opacity-[0.8] pointer-events-none">
+        <Image
+          src="/images/footer bg.png"
+          alt="Footer Background"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
 
       <div className="max-w-[1300px] mx-auto px-6 relative z-10">
         

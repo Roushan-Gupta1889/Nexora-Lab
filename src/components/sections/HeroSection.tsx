@@ -31,6 +31,8 @@ export function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const mobileBgRef = useRef<HTMLDivElement>(null);
 
 
   useGSAP(
@@ -49,6 +51,12 @@ export function HeroSection() {
         { opacity: 1, y: 0, duration: 1 },
         "-=0.4"
       )
+        .fromTo(
+          [bgRef.current, mobileBgRef.current],
+          { opacity: 0 },
+          { opacity: 1, duration: 1.5, ease: "power2.inOut" },
+          "-=0.8" // Start fading in while heading is animating
+        )
         .fromTo(
           textRef.current,
           { opacity: 0, y: 20 },
@@ -97,18 +105,36 @@ export function HeroSection() {
       ref={containerRef}
       className="relative pt-[140px] pb-16 md:pt-[140px] md:pb-20 lg:pt-[80px] lg:pb-16 overflow-hidden"
     >
+      {/* Desktop Background Image */}
+      <div 
+        ref={bgRef}
+        className="absolute inset-0 -z-10 hidden lg:block opacity-[0.25] pointer-events-none"
+        style={{ opacity: 0 }}
+      >
+        <Image
+          src="/images/hero-section bg.png"
+          alt="Hero Section Background"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+      </div>
+
       {/* Mobile Background Image */}
-      <div className="absolute inset-0 z-0 lg:hidden opacity-[0.1] pointer-events-none flex items-center justify-center">
-        <div className="relative w-full h-full scale-125 sm:scale-100">
-          <Image
-            src="/images/hero-img copy.png"
-            alt="Hero Background"
-            fill
-            className="object-contain object-center"
-            sizes="100vw"
-            priority
-          />
-        </div>
+      <div 
+        ref={mobileBgRef}
+        className="absolute inset-0 z-0 lg:hidden opacity-[0.15] pointer-events-none"
+        style={{ opacity: 0 }}
+      >
+        <Image
+          src="/images/mobile-hero-bg.png"
+          alt="Mobile Hero Background"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
       </div>
 
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">
@@ -206,7 +232,7 @@ export function HeroSection() {
                 className="relative w-[100%] sm:w-[110%] lg:w-[160%] h-full max-w-[1000px] -right-0 lg:-right-24"
               >
                 <Image
-                  src="/images/hero-img copy.png"
+                  src="/images/kivox-hero-img-bg-remove.png"
                   alt="Nexora Labs High-Performance Websites"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
